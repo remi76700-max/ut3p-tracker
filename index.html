@@ -257,6 +257,22 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
 .notif-label{font-size:11px;color:var(--tx2);flex:1}
 .notif-label strong{color:var(--tx);display:block;font-size:12px;margin-bottom:1px}
 
+/* RAVITO */
+.ravito-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:14px}
+.ravito-card{background:var(--bg2);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.ravito-card.major{border-color:rgba(249,115,22,.4)}
+.ravito-hdr{padding:11px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd)}
+.ravito-ico{font-size:18px;flex-shrink:0}
+.ravito-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--tx)}
+.ravito-km{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--or);margin-top:1px}
+.ravito-body{padding:12px 14px}
+.ravito-time{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:var(--or);line-height:1}
+.ravito-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:8px}
+.ravito-stat{background:var(--bg3);border-radius:5px;padding:6px 8px;text-align:center}
+.ravito-stat-v{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:var(--tx);line-height:1}
+.ravito-stat-l{font-size:8px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.ravito-warning{background:rgba(249,115,22,.1);border-left:3px solid var(--or);border-radius:0 5px 5px 0;padding:5px 8px;font-size:10px;color:var(--or);margin-top:6px}
+
 /* STRAVA */
 .strava-pulse{animation:pulse-strava 2s infinite}
 @keyframes pulse-strava{0%,100%{box-shadow:0 0 0 0 rgba(252,76,2,.4)}50%{box-shadow:0 0 0 8px rgba(252,76,2,0)}}
@@ -434,9 +450,9 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
     <button class="tab"     onclick="go('cal',this)">Calendrier</button>
     <button class="tab"     onclick="go('log',this)">Journal</button>
     <button class="tab"     onclick="go('stats',this)">Stats</button>
+    <button class="tab"     onclick="go('ravito',this)">🏁 Ravitos UT3P</button>
     <button class="tab"     onclick="go('strava',this)" id="tab-strava">🔗 Strava</button>
     <button class="tab"     onclick="go('health',this)">🍎 Apple Health</button>
-    <button class="tab"     onclick="go('imp',this)">Import CSV</button>
   </div>
   <div class="hst">
     <div class="hs"><div class="hv or" id="h-km">—</div><div class="hl">km</div></div>
@@ -746,6 +762,74 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
   </div>
 </div>
 
+<!-- PAGE: SIMULATEUR RAVITAILLEMENT UT3P -->
+<div class="pg" id="pg-ravito">
+
+  <!-- PARAMÈTRES -->
+  <div class="g2" style="margin-bottom:14px">
+    <div class="card">
+      <div class="ct">⚙️ Paramètres de course <em>— UT3P 90km</em></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div>
+          <label class="inp-lbl">Allure cible (min/km)</label>
+          <input class="inp" type="text" id="rv-pace" placeholder="ex: 8:30" value="8:30" oninput="ravitoCalc()">
+        </div>
+        <div>
+          <label class="inp-lbl">Poids athlète (kg)</label>
+          <input class="inp" type="number" id="rv-weight" placeholder="70" value="70" oninput="ravitoCalc()">
+        </div>
+        <div>
+          <label class="inp-lbl">Kcal/h (effort trail)</label>
+          <input class="inp" type="number" id="rv-kcal" placeholder="600" value="600" oninput="ravitoCalc()">
+        </div>
+        <div>
+          <label class="inp-lbl">Température estimée (°C)</label>
+          <input class="inp" type="number" id="rv-temp" placeholder="18" value="18" oninput="ravitoCalc()">
+        </div>
+        <div>
+          <label class="inp-lbl">Heure de départ</label>
+          <input class="inp" type="time" id="rv-start" value="07:00" oninput="ravitoCalc()">
+        </div>
+        <div>
+          <label class="inp-lbl">Objectif temps total</label>
+          <input class="inp" type="text" id="rv-goal" placeholder="ex: 15:30" value="15:30" oninput="ravitoCalc()">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ct">📍 Points de ravitaillement <em>— km + D+ cumulé</em></div>
+      <div style="display:grid;grid-template-columns:1fr 70px 70px auto;gap:6px;margin-bottom:8px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif">
+        <div>Nom du ravito</div><div>km</div><div>D+ (m)</div><div></div>
+      </div>
+      <div id="rv-points-list"></div>
+      <button onclick="ravitoAddPoint()" style="margin-top:8px;width:100%;background:var(--bg3);border:1px solid var(--bd2);border-radius:7px;padding:8px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">+ Ajouter un point</button>
+      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="ravitoLoadUT3P()" style="background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);border-radius:6px;padding:6px 12px;color:var(--or);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">🏆 Charger ravitos UT3P officiels</button>
+        <button onclick="ravitoReset()" style="background:var(--bg3);border:1px solid var(--bd2);border-radius:6px;padding:6px 12px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">↺ Réinitialiser</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RÉSUMÉ GLOBAL -->
+  <div id="rv-summary" style="display:none;background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(249,115,22,.04));border:1px solid rgba(249,115,22,.3);border-radius:12px;padding:16px 20px;margin-bottom:14px">
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:10px">🏆 UT3P 90km · Simulation complète</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px" id="rv-summary-stats"></div>
+    <!-- Barre de progression dénivelé -->
+    <div style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase">
+        <span>Profil D+</span><span id="rv-dp-total"></span>
+      </div>
+      <div id="rv-profile-bar" style="display:flex;height:8px;border-radius:4px;overflow:hidden;gap:1px"></div>
+      <div id="rv-profile-labels" style="display:flex;justify-content:space-between;font-size:8px;color:var(--tx3);margin-top:3px;font-family:'JetBrains Mono',monospace"></div>
+    </div>
+  </div>
+
+  <!-- CARTES RAVITOS -->
+  <div class="ravito-grid" id="rv-cards"></div>
+
+</div>
+
 <!-- PAGE: STRAVA SYNC -->
 <div class="pg" id="pg-strava">
 
@@ -1030,40 +1114,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
       </table>
     </div>
   </div>
-</div>
-
-<!-- PAGE: IMPORT CSV -->
-<div class="pg" id="pg-imp">
-  <div class="card" style="margin-bottom:14px">
-    <div class="ct">📁 Import CSV Strava <em>— automatique</em></div>
-    <div class="drop-zone" id="dz" ondragover="ev.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)" onclick="document.getElementById('csv-fi').click()">
-      <div class="drop-ico">📂</div>
-      <div class="drop-title">Glisse ton export Strava ici</div>
-      <div class="drop-sub">ou clique pour sélectionner le fichier activities.csv</div>
-    </div>
-    <input type="file" id="csv-fi" accept=".csv" style="display:none" onchange="handleFile(this.files[0])">
-    <div id="imp-status" style="font-size:11px;color:var(--tx3);margin-bottom:8px;display:none"></div>
-    <div id="imp-preview" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <span style="font-size:11px;color:var(--tx2)" id="imp-count">—</span>
-        <button class="btn-gn" onclick="applyImport()">IMPORTER TOUT</button>
-      </div>
-      <div class="imp-preview" id="imp-list"></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="ct">💡 Format attendu <em>— export Strava</em></div>
-    <div style="font-size:11px;color:var(--tx2);line-height:1.8">
-      1. Strava → <strong style="color:var(--tx)">Paramètres → Mes données → Télécharger mes données</strong><br>
-      2. Extrais l'archive ZIP → ouvre le dossier<br>
-      3. Glisse le fichier <strong style="color:var(--or)">activities.csv</strong> ici<br>
-      <br>
-      <strong style="color:var(--tx)">Colonnes utilisées :</strong> Date, Type, Distance, Durée, D+, FC moy., Effort relatif<br>
-      <strong style="color:var(--yw)">⚠️ Doublons :</strong> Les activités avec timestamps identiques (±60s) sont fusionnées automatiquement.
-    </div>
-  </div>
-</div>
-
 </div>
 
 <script>
@@ -1898,7 +1948,254 @@ function applyImport(){
   pendingImport=[];
 }
 
-// ===== STRAVA OAUTH =====
+// ===== RAVITO SIMULATOR =====
+let ravitoPoints = [];
+
+const UT3P_RAVITOS_OFFICIELS = [
+  {name:"Départ",km:0,dp:0,major:true,ico:"🚀"},
+  {name:"Ravito 1",km:12,dp:320,major:false,ico:"🥤"},
+  {name:"Ravito 2",km:23,dp:680,major:true,ico:"🍌"},
+  {name:"Ravito 3",km:35,dp:1100,major:true,ico:"🍽️"},
+  {name:"Ravito 4",km:47,dp:1550,major:false,ico:"🥤"},
+  {name:"Ravito 5",km:58,dp:2000,major:true,ico:"🍽️"},
+  {name:"Ravito 6",km:68,dp:2380,major:false,ico:"🥤"},
+  {name:"Ravito 7",km:78,dp:2750,major:true,ico:"🍌"},
+  {name:"Arrivée",km:90,dp:3100,major:true,ico:"🏆"},
+];
+
+function ravitoLoadUT3P(){
+  ravitoPoints = UT3P_RAVITOS_OFFICIELS.map(p=>({...p}));
+  ravitoRenderPoints();
+  ravitoCalc();
+}
+
+function ravitoReset(){
+  ravitoPoints = [];
+  ravitoRenderPoints();
+  document.getElementById('rv-cards').innerHTML = '';
+  document.getElementById('rv-summary').style.display = 'none';
+}
+
+function ravitoAddPoint(){
+  ravitoPoints.push({name:'Ravito '+(ravitoPoints.length+1),km:0,dp:0,major:false,ico:'🥤'});
+  ravitoRenderPoints();
+  ravitoCalc();
+}
+
+function ravitoDeletePoint(idx){
+  ravitoPoints.splice(idx,1);
+  ravitoRenderPoints();
+  ravitoCalc();
+}
+
+function ravitoRenderPoints(){
+  const list = document.getElementById('rv-points-list');
+  if(!list) return;
+  list.innerHTML = ravitoPoints.map((p,i)=>`
+    <div style="display:grid;grid-template-columns:1fr 70px 70px auto;gap:6px;margin-bottom:5px;align-items:center">
+      <input class="inp" type="text" value="${p.name}" placeholder="Nom" oninput="ravitoPoints[${i}].name=this.value;ravitoCalc()" style="font-size:11px;padding:6px 8px">
+      <input class="inp" type="number" value="${p.km}" placeholder="km" oninput="ravitoPoints[${i}].km=parseFloat(this.value)||0;ravitoCalc()" style="font-size:11px;padding:6px 8px">
+      <input class="inp" type="number" value="${p.dp}" placeholder="D+" oninput="ravitoPoints[${i}].dp=parseInt(this.value)||0;ravitoCalc()" style="font-size:11px;padding:6px 8px">
+      <button class="rv-del" onclick="ravitoDeletePoint(${i})">✕</button>
+    </div>`).join('');
+}
+
+function ravitoParseTime(str){
+  // Parses total time h:mm or h:mm:ss → returns minutes
+  const parts = (str||'').split(':').map(Number);
+  if(parts.length===2) return parts[0]*60+parts[1];       // h:mm → minutes
+  if(parts.length===3) return parts[0]*60+parts[1]+parts[2]/60; // h:mm:ss → minutes
+  return NaN;
+}
+
+function ravitoParsePace(str){
+  // Parses pace mm:ss per km → returns decimal minutes/km
+  const parts = (str||'').split(':').map(Number);
+  if(parts.length===2) return parts[0]+parts[1]/60;   // mm:ss → decimal minutes
+  if(parts.length===1) return parts[0];
+  return NaN;
+}
+
+function ravitoFmtTime(mins){
+  const h=Math.floor(mins/60), m=Math.round(mins%60);
+  return `${String(h).padStart(2,'0')}h${String(m).padStart(2,'0')}`;
+}
+
+function ravitoFmtClock(startMins, elapsedMins){
+  const total = startMins + elapsedMins;
+  const h=Math.floor(total/60)%24, m=Math.round(total%60);
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function ravitoCalc(){
+  if(!ravitoPoints.length) return;
+  const sorted = [...ravitoPoints].sort((a,b)=>a.km-b.km);
+
+  // Parse inputs
+  const paceStr = document.getElementById('rv-pace')?.value || '8:30';
+  const paceMins = ravitoParsePace(paceStr) || 8.5;
+  const weight   = parseFloat(document.getElementById('rv-weight')?.value) || 70;
+  const kcalH    = parseFloat(document.getElementById('rv-kcal')?.value) || 600;
+  const tempC    = parseFloat(document.getElementById('rv-temp')?.value) || 18;
+  const startStr = document.getElementById('rv-start')?.value || '07:00';
+  const startParts= startStr.split(':').map(Number);
+  const startMins = (startParts[0]||7)*60+(startParts[1]||0);
+  const goalStr  = document.getElementById('rv-goal')?.value || '15:30';
+  const goalMins = ravitoParseTime(goalStr) || 15*60+30;
+
+  // Nutrition strategy
+  const GEL_INTERVAL  = 45;   // 1 gel every 45 min
+  const ISO_INTERVAL  = 60;   // 1 iso gourde every 60 min
+  const GEL_KCAL      = 100;  // ~100 kcal per gel
+  const ISO_KCAL      = 80;   // ~80 kcal per 500ml iso
+  const ISO_ML        = 500;  // 500ml per gourde
+
+  // Water needs: base 500ml/h + extra for heat
+  const waterH = tempC > 20 ? 800 : tempC > 15 ? 600 : 500;
+
+  // D+ penalty: each 100m D+ ≈ +1.5min/km equivalent effort
+  const dpPenaltyPerM = 1.5 / 100; // min per km per 100m D+
+
+  let results = [];
+  for(let i=0; i<sorted.length; i++){
+    const pt = sorted[i];
+    const prev = i>0 ? sorted[i-1] : null;
+
+    if(!prev){
+      results.push({...pt, elapsed:0, segKm:0, segDp:0, segTime:0, totalKcal:0, totalWater:0, segKcal:0, segWater:0});
+      continue;
+    }
+
+    const segKm = pt.km - prev.km;
+    const segDp = pt.dp - prev.dp;
+
+    // Effective pace with D+ correction
+    const dpBonus = (segDp/segKm) * dpPenaltyPerM; // extra min/km for this segment
+    const effectivePace = paceMins + dpBonus;
+    const segTime = segKm * effectivePace; // in minutes
+
+    const segHours = segTime/60;
+    const segKcal  = Math.round(kcalH * segHours);
+    const segWater = Math.round(waterH * segHours);
+
+    // Gels & ISO for this segment
+    const segGels = Math.floor(segTime / GEL_INTERVAL);
+    const segIsos = Math.floor(segTime / ISO_INTERVAL);
+    const segNutrKcal = segGels * GEL_KCAL + segIsos * ISO_KCAL;
+
+    const prevResult = results[i-1];
+    const elapsed    = prevResult.elapsed + segTime;
+    const totalKcal  = prevResult.totalKcal + segKcal;
+    const totalWater = prevResult.totalWater + segWater;
+    const totalGels  = (prevResult.totalGels||0) + segGels;
+    const totalIsos  = (prevResult.totalIsos||0) + segIsos;
+
+    results.push({...pt, elapsed, segKm, segDp, segTime, segKcal, segWater, totalKcal, totalWater, effectivePace, segGels, segIsos, segNutrKcal, totalGels, totalIsos});
+  }
+
+  // Render summary
+  const last = results[results.length-1];
+  const totalTime = last?.elapsed || 0;
+  const vs = totalTime - goalMins;
+  const vsStr = vs===0?'Dans les temps': vs>0?`+${ravitoFmtTime(vs)} retard`:`-${ravitoFmtTime(Math.abs(vs))} d'avance`;
+  const vsCol = Math.abs(vs)<30?'var(--gn)':Math.abs(vs)<60?'var(--yw)':'var(--rd)';
+
+  const summaryEl = document.getElementById('rv-summary');
+  const statsEl   = document.getElementById('rv-summary-stats');
+  if(summaryEl) summaryEl.style.display = 'block';
+  if(statsEl) statsEl.innerHTML = [
+    {v:ravitoFmtTime(totalTime), l:'Temps estimé', c:'var(--or)'},
+    {v:ravitoFmtClock(startMins,totalTime), l:'Arrivée estimée', c:'var(--bl)'},
+    {v:vsStr, l:'Vs objectif', c:vsCol},
+    {v:Math.round(last?.totalKcal||0)+' kcal', l:'Calories brûlées', c:'var(--yw)'},
+    {v:Math.round((last?.totalWater||0)/1000*10)/10+' L', l:'Eau totale', c:'var(--bl)'},
+    {v:(last?.totalGels||0)+' gels', l:'Gels (1/45min)', c:'var(--or)'},
+    {v:(last?.totalIsos||0)+' gourdes', l:'Iso (1/heure)', c:'var(--gn)'},
+    {v:`${paceStr}/km`, l:'Allure de base', c:'var(--tx2)'},
+  ].map(s=>`<div style="background:var(--bg3);border-radius:6px;padding:8px 10px;text-align:center"><div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:${s.c};line-height:1">${s.v}</div><div style="font-size:8px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-top:3px">${s.l}</div></div>`).join('');
+
+  // Profile bar
+  const dpTotal = last?.dp||0;
+  const profileBar = document.getElementById('rv-profile-bar');
+  const profileLbls = document.getElementById('rv-profile-labels');
+  const dpEl = document.getElementById('rv-dp-total');
+  if(dpEl) dpEl.textContent = `D+ total : ${dpTotal}m`;
+  if(profileBar){
+    const colors = ['#3b82f6','#22c55e','#f97316','#ef4444','#a855f7','#fbbf24','#06b6d4','#ec4899'];
+    profileBar.innerHTML = results.slice(1).map((r,i)=>{
+      const pct = Math.round((r.segKm/90)*100);
+      const intensity = Math.min(1,(r.segDp/r.segKm)/20); // normalize D+/km
+      const alpha = 0.4+intensity*0.6;
+      return `<div style="flex:${pct};background:${colors[i%colors.length]};opacity:${alpha}" title="${r.name}: ${r.segKm}km D+${r.segDp}m"></div>`;
+    }).join('');
+  }
+  if(profileLbls){
+    profileLbls.innerHTML = `<span>0km</span><span>45km</span><span>90km</span>`;
+  }
+
+  // Render cards
+  const cards = document.getElementById('rv-cards');
+  if(!cards) return;
+  cards.innerHTML = results.slice(1).map((r,i)=>{
+    const prev = results[i];
+    const arrivalClock = ravitoFmtClock(startMins, r.elapsed);
+    const isLate = r.elapsed > goalMins * (r.km/90) * 1.1;
+    const isMajor = r.major;
+
+    // Warnings
+    const warnings = [];
+    if(r.segKm > 0 && r.segWater < 200) warnings.push('⚠️ Segment court — emporte de l\'eau');
+    if(r.elapsed > 12*60 && r.name.toLowerCase().includes('arriv')) warnings.push('🌙 Arrivée de nuit probable');
+    if(r.segDp/r.segKm > 30) warnings.push(`⛰️ Segment pentu: ${Math.round(r.segDp/r.segKm)}m D+/km`);
+    if(r.segKcal > 400) warnings.push(`🍌 Prendre ${Math.ceil(r.segKcal/100)} gels ou barres`);
+
+    return `<div class="ravito-card${isMajor?' major':''}">
+      <div class="ravito-hdr">
+        <div class="ravito-ico">${r.ico||'🥤'}</div>
+        <div>
+          <div class="ravito-name">${r.name}</div>
+          <div class="ravito-km">km ${r.km} · D+ ${r.dp}m · arrivée ${arrivalClock}</div>
+        </div>
+        ${isLate?'<div style="margin-left:auto;font-size:10px;color:var(--rd);font-family:\'Barlow Condensed\',sans-serif;font-weight:700">RETARD</div>':''}
+      </div>
+      <div class="ravito-body">
+        <div style="font-size:9px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px;font-family:'Barlow Condensed',sans-serif;margin-bottom:2px">Temps de passage</div>
+        <div class="ravito-time">${ravitoFmtTime(r.elapsed)}</div>
+        <div class="ravito-stats">
+          <div class="ravito-stat">
+            <div class="ravito-stat-v" style="color:var(--bl)">${r.segKm}km</div>
+            <div class="ravito-stat-l">Segment</div>
+          </div>
+          <div class="ravito-stat">
+            <div class="ravito-stat-v" style="color:var(--or)">${r.segGels} <span style="font-size:9px">gels</span></div>
+            <div class="ravito-stat-l">Gels (45min)</div>
+          </div>
+          <div class="ravito-stat">
+            <div class="ravito-stat-v" style="color:var(--gn)">${r.segIsos} <span style="font-size:9px">gourdes</span></div>
+            <div class="ravito-stat-l">Iso (1h)</div>
+          </div>
+          <div class="ravito-stat">
+            <div class="ravito-stat-v">${Math.round(r.effectivePace*10)/10}'</div>
+            <div class="ravito-stat-l">Allure eff.</div>
+          </div>
+          <div class="ravito-stat">
+            <div class="ravito-stat-v" style="color:var(--yw)">${Math.round(r.segKcal)}<span style="font-size:9px"> kcal</span></div>
+            <div class="ravito-stat-l">Kcal segment</div>
+          </div>
+          <div class="ravito-stat">
+            <div class="ravito-stat-v" style="color:var(--bl)">${r.segWater}<span style="font-size:9px">ml</span></div>
+            <div class="ravito-stat-l">Eau min.</div>
+          </div>
+        </div>
+        <div style="margin-top:8px;background:var(--bg3);border-radius:6px;padding:8px 10px;display:flex;gap:14px;flex-wrap:wrap;font-size:11px">
+          <span>📦 Cumulé : <strong style="color:var(--or)">${r.totalGels} gels</strong> · <strong style="color:var(--gn)">${r.totalIsos} gourdes iso</strong></span>
+          <span style="color:var(--tx3)">⏱ Temps : ${ravitoFmtTime(r.elapsed)}</span>
+        </div>
+        ${warnings.map(w=>`<div class="ravito-warning">${w}</div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
 let stravaTokens = {};
 
 function stravaLoadTokens(){
@@ -2090,7 +2387,7 @@ function showStravaError(msg){
 
 // ===== NOTIFICATIONS =====
 let notifTimer = null;
-let notifSettings = {enabled:false, hour:7, minute:30};
+let notifSettings = {enabled:false, hour:7, minute:50};
 
 function notifLoadSettings(){
   try{ const d=JSON.parse(localStorage.getItem('ut3p_notif')||'{}'); notifSettings={...notifSettings,...d}; }catch(e){}
@@ -2136,12 +2433,53 @@ function notifScheduleNext(){
 
 function notifFireToday(){
   if(Notification.permission !== 'granted') return;
+
   const today = notifGetTodayPlan();
-  if(today.done) return; // already done, no need to remind
-  const title = today.isRest ? '😴 UT3P — Repos aujourd\'hui' : '🏃 UT3P — Séance du jour';
-  const body = today.isRest ? 'Journée de récupération. Étirements ou marche légère si tu veux.' : today.desc;
+  const ds = fmt(NOW);
+
+  // --- Score récup Apple Health ---
+  const health = healthData[ds] || healthData[Object.keys(healthData).sort().pop()];
+  const score = health ? healthRecovScore(health) : null;
+  const scoreEmoji = !score ? '' : score>=80?'🟢':score>=60?'🟡':score>=40?'🟠':'🔴';
+  const scoreTxt = score ? `${scoreEmoji} Récup : ${score}/100` : '';
+
+  // --- Heure de coucher conseillée ---
+  const settings = healthGetSettings();
+  const wakeTime = settings.wake || '06:30';
+  const sleepGoal = parseFloat(settings.goal) || 8;
+  const bedtime = healthGetBedtime(wakeTime, sleepGoal);
+
+  // --- Séance du jour ---
+  const sessEmoji = today.isRest ? '😴' : '🏃';
+  const sessTxt = today.isRest
+    ? 'Repos · étirements ou marche légère'
+    : `${today.type} — ${today.desc}`;
+
+  // --- Composition de la notif unifiée ---
+  const dLhut = Math.max(0, Math.ceil((LHUT-NOW)/864e5));
+  const dUt3p = Math.max(0, Math.ceil((UT3P-NOW)/864e5));
+  const countdown = dLhut > 0
+    ? `J-${dLhut} LHUT · J-${dUt3p} UT3P`
+    : `J-${dUt3p} UT3P`;
+
+  const title = `${sessEmoji} UT3P Tracker · ${NOW.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})}`;
+
+  const parts = [
+    `📅 ${sessTxt}`,
+    scoreTxt,
+    `🌙 Coucher conseillé : ${bedtime}`,
+    `⏳ ${countdown}`,
+  ].filter(Boolean);
+
+  const body = parts.join('\n');
+
   try{
-    new Notification(title, {body, icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🏃</text></svg>'});
+    new Notification(title, {
+      body,
+      icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🏔️</text></svg>',
+      tag:'ut3p-daily', // replaces previous notif from same day
+      requireInteraction: false,
+    });
   }catch(e){}
 }
 
@@ -2153,7 +2491,7 @@ async function notifToggle(){
     notifSave();
     notifScheduleNext();
     notifUpdateBanner();
-    alert(`✅ Notifications activées ! Tu recevras un rappel chaque matin à ${String(notifSettings.hour).padStart(2,'0')}h${String(notifSettings.minute).padStart(2,'0')}.`);
+    alert(`🔔 Notifications activées !\n\nChaque matin à ${String(notifSettings.hour).padStart(2,'0')}h${String(notifSettings.minute).padStart(2,'0')} tu recevras :\n• 📅 La séance du jour\n• 🟢 Ton score de récupération\n• 🌙 L'heure de coucher conseillée\n• ⏳ Le compte à rebours LHUT/UT3P\n\nTout en une seule notification.`);
   } else {
     notifSettings.enabled = false;
     notifSave();
@@ -2164,13 +2502,15 @@ async function notifToggle(){
 
 function notifUpdateBanner(){
   const btn = document.getElementById('notif-toggle-btn');
+  const timeInput = document.getElementById('notif-time-input');
   if(!btn) return;
-  if(!btn) return;
-  if(notifSettings.enabled && Notification.permission==='granted'){
+  const active = notifSettings.enabled && Notification.permission==='granted';
+  if(active){
     btn.textContent='🔔 Notifs ON'; btn.classList.add('on');
   } else {
     btn.textContent='🔕 Notifs OFF'; btn.classList.remove('on');
   }
+  if(timeInput) timeInput.style.display = active ? 'block' : 'none';
 }
 
 function renderTodayBanner(){
@@ -2197,14 +2537,12 @@ function renderTodayBanner(){
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:${today.done?'var(--gn)':col}">${today.type}</div>
         <div style="font-size:11px;color:var(--tx2);margin-top:2px;line-height:1.4">${today.desc}</div>
       </div>
-      <div style="display:flex;gap:6px;flex-shrink:0;align-items:center">
+      <div style="display:flex;gap:6px;flex-shrink:0;align-items:center;flex-wrap:wrap">
         ${!today.done?`<button onclick="openMo('${fmt(NOW)}')" style="background:${col};border:none;padding:6px 14px;border-radius:6px;color:#000;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer">Saisir</button>`:''}
-        <button class="tb-notif-btn${notifSettings.enabled&&Notification.permission==='granted'?' on':''}" id="notif-toggle-btn" onclick="notifToggle()" title="Activer les rappels quotidiens">
+        <button class="tb-notif-btn${notifSettings.enabled&&Notification.permission==='granted'?' on':''}" id="notif-toggle-btn" onclick="notifToggle()" title="Notifications quotidiennes 7h50">
           ${notifSettings.enabled&&Notification.permission==='granted'?'🔔 Notifs ON':'🔕 Notifs OFF'}
         </button>
-        <div style="font-size:9px;color:var(--tx3);text-align:center">
-          <input type="time" id="notif-time-input" value="${String(notifSettings.hour).padStart(2,'0')}:${String(notifSettings.minute).padStart(2,'0')}" onchange="notifUpdateTime(this.value)" style="background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:3px 6px;color:var(--tx2);font-size:10px;outline:none;font-family:'JetBrains Mono',monospace">
-        </div>
+        <input type="time" id="notif-time-input" value="${String(notifSettings.hour).padStart(2,'0')}:${String(notifSettings.minute).padStart(2,'0')}" onchange="notifUpdateTime(this.value)" style="background:var(--bg3);border:1px solid var(--bd2);border-radius:4px;padding:3px 6px;color:var(--tx2);font-size:10px;outline:none;font-family:'JetBrains Mono',monospace;display:${notifSettings.enabled&&Notification.permission==='granted'?'block':'none'}" title="Heure d'envoi">
       </div>
     </div>`;
 }
@@ -2295,7 +2633,7 @@ async function healthHandleFiles(files){
       r.onerror = rej;
       r.readAsText(file, 'UTF-8');
     });
-    if(isCsv) healthParseCSVSilent(text);
+    if(isCsv) healthParseCSVByFilename(text, file.name.toLowerCase());
     else healthParseJSONSilent(text);
   }
 
@@ -2416,6 +2754,148 @@ function healthParseJSONSilent(text){ _healthParseJSON(text, false); }
 function healthParseCSVSilent(text){ _healthParseCSV(text, false); }
 function healthParseJSON(text){ _healthParseJSON(text, true); }
 function healthParseCSV(text){ _healthParseCSV(text, true); }
+
+// Filename-based parser — Health Auto Export uses filename as metric name
+function healthParseCSVByFilename(text, filename){
+  try{
+    const lines = text.trim().split('\n');
+    if(lines.length < 2) return;
+    const sep = lines[0].includes(';') ? ';' : ',';
+    const headers = lines[0].split(sep).map(h=>h.trim().replace(/^"|"$/g,'').toLowerCase());
+
+    // Detect metric from filename (English AND French)
+    const fn = filename;
+    const isSleep   = fn.includes('sleep') || fn.includes('sommeil') || fn.includes('analyse_du_sommeil') || fn.includes('analyse du sommeil');
+    const isRhr     = fn.includes('resting') || fn.includes('resting heart') || fn.includes('fc_repos') || fn.includes('fréquence cardiaque au repos') || fn.includes('frequence cardiaque au repos');
+    const isHrv     = fn.includes('hrv') || fn.includes('variability') || fn.includes('variabilit') || fn.includes('fr_quence_cardiaque') || (fn.includes('variabilite') && fn.includes('cardiaque'));
+    const isSteps   = fn.includes('step') || fn.includes('pas');
+    const isDeep    = fn.includes('deep') || fn.includes('profond');
+
+    // If none detected from filename, fall back to column-based detection
+    if(!isSleep && !isRhr && !isHrv && !isSteps){
+      _healthParseCSV(text, false);
+      return;
+    }
+
+    const getDate = cols => {
+      for(const key of ['date/time','date','startdate','start date','datetime','startdatetime']){
+        const idx = headers.indexOf(key);
+        if(idx >= 0 && cols[idx]) return cols[idx].slice(0,10);
+      }
+      return '';
+    };
+    const getVal = cols => {
+      for(const key of ['qty','value','quantity','amount','count']){
+        const idx = headers.indexOf(key);
+        if(idx >= 0 && cols[idx]) return cols[idx];
+      }
+      return '';
+    };
+    const getEnd = cols => {
+      for(const key of ['enddate','end date','enddatetime']){
+        const idx = headers.indexOf(key);
+        if(idx >= 0 && cols[idx]) return cols[idx];
+      }
+      return '';
+    };
+
+    const sleepSegments = {};
+
+    lines.slice(1).forEach(line => {
+      if(!line.trim()) return;
+      const cols = line.split(sep).map(c=>c.trim().replace(/^"|"$/g,''));
+      const date = getDate(cols);
+      if(!date) return;
+      const valRaw = getVal(cols);
+      const val = parseFloat(valRaw) || 0;
+
+      if(isSleep || isDeep){
+        // FORMAT A : pre-aggregated columns (Health Auto Export "Analyse du Sommeil")
+        // Columns: Date/Time, Start, End, Total Sleep (hr), Core (hr), Deep (hr), REM (hr), Awake (hr)...
+        const getCol = (...keys) => {
+          for(const k of keys){
+            const idx = headers.findIndex(h=>h.includes(k));
+            if(idx>=0 && cols[idx]) return parseFloat(cols[idx])||0;
+          }
+          return 0;
+        };
+        const totalSleep = getCol('total sleep','total');
+        const deepSleep  = getCol('deep');
+        const coreSleep  = getCol('core');
+        const remSleep   = getCol('rem');
+
+        if(totalSleep > 0){
+          // Pre-aggregated: use directly
+          if(!healthData[date]) healthData[date]={};
+          healthData[date].sleep = Math.round(totalSleep*10)/10;
+          if(deepSleep > 0)
+            healthData[date].deep = Math.round(deepSleep*10)/10;
+          return;
+        }
+
+        // FORMAT B : segments with stage codes (raw Apple Health export)
+        const stageIdx = headers.findIndex(h=>h==='value'||h==='stage'||h.includes('sleepstage'));
+        const stage = (stageIdx>=0 ? cols[stageIdx] : '').toLowerCase().trim();
+        const isAwake = stage==='0' || stage==='2'
+          || stage.includes('awake') || stage.includes('inbed') || stage.includes('in bed');
+        if(isAwake) return;
+        const isDeepStage = stage==='4' || stage.includes('deep');
+        const startRaw = getDate(cols);
+        const endRaw = getEnd(cols);
+        let dh = 0;
+        if(startRaw && endRaw){
+          const ms = new Date(endRaw) - new Date(startRaw);
+          if(ms > 0) dh = ms / 3600000;
+        }
+        if(dh <= 0 && val > 0){
+          dh = val > 43200 ? val/3600 : val > 24 ? val/60 : val;
+        }
+        if(dh > 0 && dh < 12){
+          sleepSegments[date] = (sleepSegments[date]||0) + dh;
+          if(isDeepStage || isDeep){
+            if(!healthData[date]) healthData[date]={};
+            healthData[date].deep = Math.round(((healthData[date].deep||0)+dh)*10)/10;
+          }
+        }
+      } else if(isRhr && val > 0){
+        if(!healthData[date]) healthData[date]={};
+        if(!healthData[date].rhr || val < healthData[date].rhr) // take lowest (most rested)
+          healthData[date].rhr = Math.round(val);
+      } else if(isHrv){
+        // HRV column can be named "Variabilité de la Fréquence Cardiaque (ms)" in French
+        let hrvVal = val;
+        if(!hrvVal){
+          const hrvIdx = headers.findIndex(h=>h.includes('variabilit')||h.includes('hrv')||h.includes('variab'));
+          if(hrvIdx>=0) hrvVal = parseFloat(cols[hrvIdx])||0;
+        }
+        if(hrvVal > 0){
+          if(!healthData[date]) healthData[date]={};
+          // Average multiple readings per day
+          if(healthData[date].hrv){
+            healthData[date]._hrvSum = (healthData[date]._hrvSum||healthData[date].hrv) + hrvVal;
+            healthData[date]._hrvCount = (healthData[date]._hrvCount||1) + 1;
+            healthData[date].hrv = Math.round(healthData[date]._hrvSum / healthData[date]._hrvCount);
+          } else {
+            healthData[date].hrv = Math.round(hrvVal);
+          }
+        }
+      } else if(isSteps && val > 0){
+        if(!healthData[date]) healthData[date]={};
+        healthData[date].steps = Math.max(healthData[date].steps||0, Math.round(val));
+      }
+    });
+
+    // Apply sleep totals
+    if(isSleep){
+      Object.entries(sleepSegments).forEach(([date,h])=>{
+        if(h >= 0.5 && h <= 16){
+          if(!healthData[date]) healthData[date]={};
+          healthData[date].sleep = Math.round(h*10)/10;
+        }
+      });
+    }
+  }catch(e){ console.warn('CSV parse error', filename, e.message); }
+}
 
 function _healthParseJSON(text, showAlert){
   try{
@@ -2658,34 +3138,40 @@ function _healthParseCSV(text, showAlert){
 }
 function healthRecovScore(d){
   if(!d) return null;
-  let score=50, factors=0;
-  // Sommeil durée (idéal 7.5-9h)
+  let score = 0, totalWeight = 0;
+
+  // Sommeil durée (idéal 7.5-9h) — poids 0.25
   if(d.sleep){
-    const s=Math.min(100, Math.max(0, d.sleep>=7.5?100:d.sleep>=6?60+(d.sleep-6)/1.5*40:d.sleep*10));
-    score+=s*0.25; factors++;
+    const s = Math.min(100, Math.max(0, d.sleep>=8?100 : d.sleep>=7?85+(d.sleep-7)*15 : d.sleep>=6?60+(d.sleep-6)*25 : d.sleep*10));
+    score += s * 0.25; totalWeight += 0.25;
   }
-  // Sommeil profond (idéal >1.5h)
+  // Sommeil profond (idéal >1.5h) — poids 0.15
   if(d.deep){
-    const dp=Math.min(100, d.deep>=1.5?100:d.deep/1.5*100);
-    score+=dp*0.15; factors++;
+    const dp = Math.min(100, d.deep>=1.5?100 : d.deep/1.5*100);
+    score += dp * 0.15; totalWeight += 0.15;
   }
-  // FC repos (plus basse = mieux, baseline personnelle)
+  // FC repos vs baseline perso — poids 0.25
   if(d.rhr){
-    const rhrVals=Object.values(healthData).filter(e=>e.rhr).map(e=>e.rhr);
-    const avgRhr=rhrVals.length?rhrVals.reduce((a,b)=>a+b)/rhrVals.length:60;
-    const rhrScore=d.rhr<=avgRhr?100:Math.max(0,100-(d.rhr-avgRhr)*5);
-    score+=rhrScore*0.25; factors++;
+    const rhrVals = Object.values(healthData).filter(e=>e.rhr).map(e=>e.rhr);
+    const avgRhr = rhrVals.length ? rhrVals.reduce((a,b)=>a+b)/rhrVals.length : 60;
+    const rhrScore = d.rhr <= avgRhr ? 100 : Math.max(0, 100-(d.rhr-avgRhr)*6);
+    score += rhrScore * 0.25; totalWeight += 0.25;
   }
-  // HRV (plus haute = mieux)
+  // HRV vs baseline perso — poids 0.20
   if(d.hrv){
-    const hrvVals=Object.values(healthData).filter(e=>e.hrv).map(e=>e.hrv);
-    const avgHrv=hrvVals.length?hrvVals.reduce((a,b)=>a+b)/hrvVals.length:50;
-    const hrvScore=d.hrv>=avgHrv?100:Math.max(0,(d.hrv/avgHrv)*100);
-    score+=hrvScore*0.2; factors++;
+    const hrvVals = Object.values(healthData).filter(e=>e.hrv).map(e=>e.hrv);
+    const avgHrv = hrvVals.length ? hrvVals.reduce((a,b)=>a+b)/hrvVals.length : 50;
+    const hrvScore = d.hrv >= avgHrv ? 100 : Math.max(0, (d.hrv/avgHrv)*100);
+    score += hrvScore * 0.20; totalWeight += 0.20;
   }
-  // Ressenti subjectif
-  if(d.feel){ score+=d.feel*10*0.15; factors++; }
-  return factors>0?Math.min(99,Math.max(1,Math.round(score/factors*factors/(factors||1)))):null;
+  // Ressenti subjectif — poids 0.15
+  if(d.feel){
+    score += (d.feel/10)*100 * 0.15; totalWeight += 0.15;
+  }
+
+  // Normalize by sum of available weights (not count)
+  if(totalWeight === 0) return null;
+  return Math.min(99, Math.max(1, Math.round(score / totalWeight)));
 }
 
 function healthGetColor(score){
@@ -3275,6 +3761,7 @@ function go(id,btn){
   btn.classList.add('on');
   if(id==='log') renderLog();
   if(id==='strava') stravaRenderState();
+  if(id==='ravito'){ ravitoRenderPoints(); if(!ravitoPoints.length) ravitoLoadUT3P(); else ravitoCalc(); }
   if(id==='health'){ healthLoadSettings(); healthRender(); renderSleepPerfCorrelation(); }
   if(id==='stats'){ renderCharts(); renderHeatmap(); }
 }
