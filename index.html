@@ -1057,7 +1057,7 @@ function plan(d){
   if(dw===0){
     if(ph==='taper1'||ph==='taper2') return{type:'REPOS',desc:"Repos complet",col:'dim'};
     if(ph==='recup') return{type:'VÉLO',desc:"40' Vélo souple récup",col:'gn',bike:true};
-    if(ph==='phase2') return{type:'RÉCUP ACTIVE',desc:"35' Footing Z1 très souple + PPG 15' — jambes post week-end",col:'bl'};
+    if(ph==='phase2') return{type:'RÉCUP ACTIVE',desc:"35' Footing Z1 très souple + 20' Renfo (squats excentriques, fentes, gainage) — jambes post week-end",col:'bl'};
     const t=(m>=5)?'40 min':'40 min';
     return{type:'VÉLO',desc:`${t} · Vélo souple + PPG`,col:'gn',bike:true};
   }
@@ -1071,7 +1071,16 @@ function plan(d){
   }
   if(dw===1){
     if(ph==='phase1'){let q='VMA: 10×400m';if(m===3||m===4)q='VMA: 8×600m ou Seuil 3×10\'';return{type:'QUALITÉ',desc:q,col:'or'};}
-    const q=(m>=6)?'Force côte: 10×2\' + 1 VMA/15j':'Seuil: 3×8\' ou 4×6\' côte';return{type:'QUALITÉ',desc:q,col:'or'};
+    if(ph==='taper1'||ph==='taper2') return{type:'AFFÛTAGE',desc:"30' souple + 5×100m",col:'pu'};
+    if(ph==='recup') return{type:'RÉCUP ACTIVE',desc:"35' Footing Z1 très souple + PPG 15'",col:'bl'};
+    // Phase 2 : alterner côtes (sem impaire) et seuil (sem paire) + renfo 2x/sem
+    const weekNum = Math.floor((d-START)/(864e5*7));
+    const isCoteWeek = weekNum % 2 === 0;
+    if(isCoteWeek){
+      return{type:'CÔTES + RENFO',desc:"8×1'30\" montée raide 85-90%FC · récup descente + 20' Renfo (squats excentriques, fentes, gainage)",col:'or'};
+    } else {
+      return{type:'SEUIL + RENFO',desc:"Seuil : 3×10' à 80-85%FC + 20' Renfo (ischio-jambiers, proprioception, gainage latéral)",col:'or'};
+    }
   }
   if(dw===3){
     let desc='1h00 EF (Z2)';
@@ -1084,7 +1093,11 @@ function plan(d){
   }
   if(dw===5){
     if(ph==='phase1'){let e='30\' Escaliers (4200 marches) + PPG';if(m===3||m===4)e='45\' Escaliers + Gainage';return{type:'SPÉCIFIQUE',desc:e,col:'or'};}
-    const s=(m>=6)?'1h–1h30 Rando-course (pré-fatigue)':'30\' Renfo + 20\' Footing';return{type:'SPÉCIFIQUE',desc:s,col:'or'};
+    if(ph==='taper1'||ph==='taper2') return{type:'AFFÛTAGE',desc:"30' souple + 5×100m allure course",col:'pu'};
+    if(ph==='recup') return{type:'SPÉCIFIQUE',desc:"30' Renfo léger + 20' Footing souple",col:'or'};
+    // Phase 2 : rando-course + renfo en alternance
+    const s=(m>=7)?'1h–1h30 Rando-course terrain D+ · bâtons · marche montée · Méthode Cyrano 25:5':'30\' Renfo complet (squats, fentes, gainage) + 20\' Footing';
+    return{type:'SPÉCIFIQUE',desc:s,col:'or'};
   }
   if(dw===6){
     if(dL>0){
