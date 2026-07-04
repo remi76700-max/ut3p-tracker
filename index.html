@@ -257,22 +257,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
 .notif-label{font-size:11px;color:var(--tx2);flex:1}
 .notif-label strong{color:var(--tx);display:block;font-size:12px;margin-bottom:1px}
 
-/* RAVITO */
-.ravito-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin-top:14px}
-.ravito-card{background:var(--bg2);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
-.ravito-card.major{border-color:rgba(249,115,22,.4)}
-.ravito-hdr{padding:11px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--bd)}
-.ravito-ico{font-size:18px;flex-shrink:0}
-.ravito-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--tx)}
-.ravito-km{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--or);margin-top:1px}
-.ravito-body{padding:12px 14px}
-.ravito-time{font-family:'Barlow Condensed',sans-serif;font-size:30px;font-weight:900;color:var(--or);line-height:1}
-.ravito-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:8px}
-.ravito-stat{background:var(--bg3);border-radius:5px;padding:6px 8px;text-align:center}
-.ravito-stat-v{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:var(--tx);line-height:1}
-.ravito-stat-l{font-size:8px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-.ravito-warning{background:rgba(249,115,22,.1);border-left:3px solid var(--or);border-radius:0 5px 5px 0;padding:5px 8px;font-size:10px;color:var(--or);margin-top:6px}
-
 /* STRAVA */
 .strava-pulse{animation:pulse-strava 2s infinite}
 @keyframes pulse-strava{0%,100%{box-shadow:0 0 0 0 rgba(252,76,2,.4)}50%{box-shadow:0 0 0 8px rgba(252,76,2,0)}}
@@ -450,9 +434,7 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
     <button class="tab"     onclick="go('cal',this)">Calendrier</button>
     <button class="tab"     onclick="go('log',this)">Journal</button>
     <button class="tab"     onclick="go('stats',this)">Stats</button>
-    <button class="tab"     onclick="go('ravito',this)">🏁 Ravitos UT3P</button>
     <button class="tab"     onclick="go('strava',this)" id="tab-strava">🔗 Strava</button>
-    <button class="tab"     onclick="go('health',this)">🍎 Apple Health</button>
   </div>
   <div class="hst">
     <div class="hs"><div class="hv or" id="h-km">—</div><div class="hl">km</div></div>
@@ -533,12 +515,12 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
   </div>
   <div class="hero">
     <div class="hgrid">
-      <div class="cdc bl">
-        <div class="cdl">Objectif intermédiaire</div>
+      <div class="cdc gn">
+        <div class="cdl">✅ Course terminée</div>
         <div class="cdt">🏅 LHUT — Le Havre 42km</div>
-        <div class="cdn bl" id="d-lhut">—</div>
-        <div class="cds">jours · 31 Mai 2026</div>
-        <div class="pb"><div class="pb-t"><span>Départ</span><span id="p-lhut">0%</span></div><div class="pb-tr"><div class="pb-f" id="b-lhut" style="width:0%"></div></div></div>
+        <div class="cdn gn">6h04</div>
+        <div class="cds">31 Mai 2026 · Objectif accompli</div>
+        <div class="pb"><div class="pb-t"><span>Départ</span><span>100%</span></div><div class="pb-tr"><div class="pb-f" style="width:100%;background:var(--gn)"></div></div></div>
       </div>
       <div class="cdc or">
         <div class="cdl">Objectif A</div>
@@ -599,17 +581,13 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
       <div style="background:var(--bg3);border-radius:8px;padding:10px;display:flex;gap:10px;align-items:center;border-left:3px solid var(--or)"><div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;color:var(--or);min-width:45px">~19km</div><div><div style="font-size:11px;font-weight:600;color:var(--tx)">Arboretum Harfleur ✅</div><div style="font-size:9px;color:var(--tx3)">22 mars 2026 · D+166m · Effort ~262</div></div></div>
     </div>
   </div>
-  <!-- BANNIÈRE PIC LHUT -->
+  <!-- BANNIÈRE RÉSULTAT LHUT -->
   <div style="background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(34,197,94,.05));border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:12px 18px;margin-bottom:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-    <div style="font-size:28px">🏆</div>
+    <div style="font-size:28px">🏅</div>
     <div style="flex:1">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gn);margin-bottom:2px">Pic de charge LHUT atteint</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:var(--tx);letter-spacing:.5px">32km · D+620m · 2 Mai 2026 ✅</div>
-      <div style="font-size:11px;color:var(--tx2);margin-top:3px">Plus grosse sortie de la prépa. Programme normal jusqu'au 17 mai, puis <strong style="color:var(--pu)">affûtage 2 semaines</strong> : S1 −30% · S2 −50% → arrivée fraîche le 31 mai.</div>
-    </div>
-    <div style="text-align:center;flex-shrink:0">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:900;color:var(--gn);line-height:1" id="d-lhut-days2">—</div>
-      <div style="font-size:9px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px">jours LHUT</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gn);margin-bottom:2px">LHUT 42km — Terminé ✅</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:var(--tx);letter-spacing:.5px">6h04 · 41.6km · FC moy 148bpm</div>
+      <div style="font-size:11px;color:var(--tx2);margin-top:3px">Nutrition ✅ · Finissait encore à 7:40/km · Patte d'oie post-course → guérie. Focus : <strong style="color:var(--or)">UT3P 20 sept.</strong></div>
     </div>
   </div>
   <!-- PRÉVISION FORME + POST-RACE -->
@@ -762,74 +740,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
   </div>
 </div>
 
-<!-- PAGE: SIMULATEUR RAVITAILLEMENT UT3P -->
-<div class="pg" id="pg-ravito">
-
-  <!-- PARAMÈTRES -->
-  <div class="g2" style="margin-bottom:14px">
-    <div class="card">
-      <div class="ct">⚙️ Paramètres de course <em>— UT3P 90km</em></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-        <div>
-          <label class="inp-lbl">Allure cible (min/km)</label>
-          <input class="inp" type="text" id="rv-pace" placeholder="ex: 8:30" value="8:30" oninput="ravitoCalc()">
-        </div>
-        <div>
-          <label class="inp-lbl">Poids athlète (kg)</label>
-          <input class="inp" type="number" id="rv-weight" placeholder="70" value="70" oninput="ravitoCalc()">
-        </div>
-        <div>
-          <label class="inp-lbl">Kcal/h (effort trail)</label>
-          <input class="inp" type="number" id="rv-kcal" placeholder="600" value="600" oninput="ravitoCalc()">
-        </div>
-        <div>
-          <label class="inp-lbl">Température estimée (°C)</label>
-          <input class="inp" type="number" id="rv-temp" placeholder="18" value="18" oninput="ravitoCalc()">
-        </div>
-        <div>
-          <label class="inp-lbl">Heure de départ</label>
-          <input class="inp" type="time" id="rv-start" value="07:00" oninput="ravitoCalc()">
-        </div>
-        <div>
-          <label class="inp-lbl">Objectif temps total</label>
-          <input class="inp" type="text" id="rv-goal" placeholder="ex: 15:30" value="15:30" oninput="ravitoCalc()">
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="ct">📍 Points de ravitaillement <em>— km + D+ cumulé</em></div>
-      <div style="display:grid;grid-template-columns:1fr 70px 70px auto;gap:6px;margin-bottom:8px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif">
-        <div>Nom du ravito</div><div>km</div><div>D+ (m)</div><div></div>
-      </div>
-      <div id="rv-points-list"></div>
-      <button onclick="ravitoAddPoint()" style="margin-top:8px;width:100%;background:var(--bg3);border:1px solid var(--bd2);border-radius:7px;padding:8px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">+ Ajouter un point</button>
-      <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-        <button onclick="ravitoLoadUT3P()" style="background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);border-radius:6px;padding:6px 12px;color:var(--or);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">🏆 Charger ravitos UT3P officiels</button>
-        <button onclick="ravitoReset()" style="background:var(--bg3);border:1px solid var(--bd2);border-radius:6px;padding:6px 12px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">↺ Réinitialiser</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- RÉSUMÉ GLOBAL -->
-  <div id="rv-summary" style="display:none;background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(249,115,22,.04));border:1px solid rgba(249,115,22,.3);border-radius:12px;padding:16px 20px;margin-bottom:14px">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--or);margin-bottom:10px">🏆 UT3P 90km · Simulation complète</div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px" id="rv-summary-stats"></div>
-    <!-- Barre de progression dénivelé -->
-    <div style="margin-top:12px">
-      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase">
-        <span>Profil D+</span><span id="rv-dp-total"></span>
-      </div>
-      <div id="rv-profile-bar" style="display:flex;height:8px;border-radius:4px;overflow:hidden;gap:1px"></div>
-      <div id="rv-profile-labels" style="display:flex;justify-content:space-between;font-size:8px;color:var(--tx3);margin-top:3px;font-family:'JetBrains Mono',monospace"></div>
-    </div>
-  </div>
-
-  <!-- CARTES RAVITOS -->
-  <div class="ravito-grid" id="rv-cards"></div>
-
-</div>
-
 <!-- PAGE: STRAVA SYNC -->
 <div class="pg" id="pg-strava">
 
@@ -938,184 +848,6 @@ body{font-family:'Barlow',sans-serif;background:var(--bg);color:var(--tx);min-he
 
 </div>
 
-<!-- PAGE: APPLE HEALTH -->
-<div class="pg" id="pg-health">
-
-  <!-- SCORE RÉCUP DU JOUR -->
-  <!-- PARAMÈTRES SOMMEIL -->
-  <div class="card" style="margin-bottom:14px">
-    <div class="ct">⚙️ Mes paramètres <em>— heure de réveil habituelle</em></div>
-    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-      <div>
-        <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Heure de réveil habituelle</label>
-        <input type="time" id="wake-time" value="06:30" onchange="healthSaveSettings()" style="background:var(--bg3);border:1px solid var(--bd2);border-radius:7px;padding:8px 12px;color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;outline:none">
-      </div>
-      <div>
-        <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Objectif sommeil (heures)</label>
-        <input type="number" id="sleep-goal" value="8" min="6" max="10" step="0.5" onchange="healthSaveSettings()" style="background:var(--bg3);border:1px solid var(--bd2);border-radius:7px;padding:8px 12px;color:var(--tx);font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;outline:none;width:90px">
-      </div>
-      <div style="font-size:11px;color:var(--tx3);line-height:1.6;padding:8px 0">
-        Ces infos permettent de calculer ton heure de coucher idéale<br>et d'adapter les conseils à ton rythme.
-      </div>
-    </div>
-  </div>
-
-  <!-- SCORE DE RÉCUPÉRATION -->
-  <div id="health-score-card" style="display:none;margin-bottom:14px">
-    <!-- VERDICT PRINCIPAL -->
-    <div id="hs-main-card" style="border-radius:14px;overflow:hidden;border:1px solid rgba(34,197,94,.25)">
-      <div style="padding:16px 20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-        <div style="text-align:center;flex-shrink:0">
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:80px;font-weight:900;line-height:1" id="hs-score">—</div>
-          <div style="font-size:9px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px">/100 · Récup</div>
-        </div>
-        <div style="flex:1;min-width:180px">
-          <div style="font-size:10px;font-family:'Barlow Condensed',sans-serif;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px" id="hs-phase-lbl">Aujourd'hui</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px" id="hs-verdict">—</div>
-          <div style="font-size:12px;color:var(--tx2);line-height:1.6" id="hs-advice">—</div>
-        </div>
-      </div>
-
-      <!-- MÉTRIQUES -->
-      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--bd)" id="hs-details"></div>
-
-      <!-- CE QUE TU DOIS FAIRE AUJOURD'HUI -->
-      <div id="hs-actions" style="padding:14px 20px;border-top:1px solid var(--bd)"></div>
-
-      <!-- SUIVI SOMMEIL DÉTAILLÉ -->
-      <div id="hs-sleep-block" style="padding:14px 20px;border-top:1px solid var(--bd)"></div>
-
-      <!-- HEURE DE COUCHER CONSEILLÉE -->
-      <div id="hs-bedtime" style="padding:12px 20px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(168,85,247,.06)"></div>
-    </div>
-  </div>
-
-  <!-- IMPORT -->
-  <div class="g2" style="margin-bottom:14px">
-
-    <!-- MÉTHODE 1 : Health Auto Export JSON -->
-    <div class="card">
-      <div class="ct">📲 Import <em>Health Auto Export (recommandé)</em></div>
-      <div style="font-size:11px;color:var(--tx2);line-height:1.7;margin-bottom:12px">
-        <strong style="color:var(--tx)">1.</strong> Télécharge <strong style="color:var(--or)">Health Auto Export</strong> sur l'App Store (4€)<br>
-        <strong style="color:var(--tx)">2.</strong> Dans l'app → Export → Format <strong style="color:var(--or)">JSON</strong><br>
-        <strong style="color:var(--tx)">3.</strong> Sélectionne : Sommeil · FC repos · Pas · HRV<br>
-        <strong style="color:var(--tx)">4.</strong> Envoie le fichier JSON → Glisse ici ↓
-      </div>
-      <div class="drop-zone" id="health-dz" style="padding:24px" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="healthHandleDrop(event)" onclick="document.getElementById('health-fi').click()">
-        <div style="font-size:28px;margin-bottom:8px">📂</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx)">Glisse le dossier complet ici</div>
-        <div style="font-size:10px;color:var(--tx3);margin-top:4px">ou clique pour sélectionner plusieurs fichiers CSV/JSON</div>
-        <div style="font-size:10px;color:var(--tx3);margin-top:2px">Health Auto Export · tous les fichiers en une fois</div>
-      </div>
-      <input type="file" id="health-fi" accept=".json,.csv" multiple style="display:none" onchange="healthHandleFiles(this.files)">
-    </div>
-
-    <!-- MÉTHODE 2 : Saisie manuelle -->
-    <div class="card">
-      <div class="ct">✍️ Saisie manuelle <em>— chaque matin</em></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Date</label>
-          <input class="inp" type="date" id="h-date">
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Durée sommeil (h)</label>
-          <input class="inp" type="number" step="0.25" id="h-sleep" placeholder="7.5">
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Sommeil profond (h)</label>
-          <input class="inp" type="number" step="0.1" id="h-deep" placeholder="1.5">
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">FC repos matin (bpm)</label>
-          <input class="inp" type="number" id="h-rhr" placeholder="52">
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">HRV (ms)</label>
-          <input class="inp" type="number" id="h-hrv" placeholder="65">
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Pas du jour</label>
-          <input class="inp" type="number" id="h-steps" placeholder="8500">
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Ressenti matin (1-10)</label>
-          <div style="display:flex;gap:3px" id="h-feel-row">
-            <button class="rb" onclick="setHealthFeel(1)">1</button><button class="rb" onclick="setHealthFeel(2)">2</button>
-            <button class="rb" onclick="setHealthFeel(3)">3</button><button class="rb" onclick="setHealthFeel(4)">4</button>
-            <button class="rb" onclick="setHealthFeel(5)">5</button><button class="rb" onclick="setHealthFeel(6)">6</button>
-            <button class="rb" onclick="setHealthFeel(7)">7</button><button class="rb" onclick="setHealthFeel(8)">8</button>
-            <button class="rb" onclick="setHealthFeel(9)">9</button><button class="rb" onclick="setHealthFeel(10)">10</button>
-          </div>
-        </div>
-        <div>
-          <label style="display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--tx3);margin-bottom:4px;font-family:'Barlow Condensed',sans-serif">Qualité sommeil (1-10)</label>
-          <div style="display:flex;gap:3px" id="h-qual-row">
-            <button class="rb" onclick="setHealthQual(1)">1</button><button class="rb" onclick="setHealthQual(2)">2</button>
-            <button class="rb" onclick="setHealthQual(3)">3</button><button class="rb" onclick="setHealthQual(4)">4</button>
-            <button class="rb" onclick="setHealthQual(5)">5</button><button class="rb" onclick="setHealthQual(6)">6</button>
-            <button class="rb" onclick="setHealthQual(7)">7</button><button class="rb" onclick="setHealthQual(8)">8</button>
-            <button class="rb" onclick="setHealthQual(9)">9</button><button class="rb" onclick="setHealthQual(10)">10</button>
-          </div>
-        </div>
-      </div>
-      <button onclick="healthSaveManual()" style="width:100%;background:var(--gn);border:none;padding:10px;border-radius:8px;color:#000;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer">💾 ENREGISTRER</button>
-    </div>
-  </div>
-
-  <!-- GRAPHIQUES -->
-  <div class="g2" style="margin-bottom:14px">
-    <div class="card">
-      <div class="ct">😴 Sommeil <em>— durée + profond (14j)</em></div>
-      <canvas id="ch-sleep" height="160"></canvas>
-    </div>
-    <div class="card">
-      <div class="ct">❤️ FC repos & HRV <em>— évolution</em></div>
-      <canvas id="ch-rhr" height="160"></canvas>
-    </div>
-  </div>
-  <div class="g2" style="margin-bottom:14px">
-    <div class="card">
-      <div class="ct">🔋 Score de récupération <em>— historique</em></div>
-      <canvas id="ch-recov" height="160"></canvas>
-    </div>
-    <div class="card">
-      <div class="ct">😴→🏃 Sommeil vs Allure <em>— corrélation J+1</em></div>
-      <canvas id="ch-sleep-perf" height="160"></canvas>
-      <div style="font-size:9px;color:var(--tx3);margin-top:6px;line-height:1.4" id="sleep-perf-note">Chaque point = ton allure le lendemain d'une nuit mesurée. Plus tu dors, mieux tu cours ?</div>
-    </div>
-  </div>
-  <div class="g2" style="margin-bottom:14px">
-    <div class="card">
-      <div class="ct">👟 Pas quotidiens <em>— activité totale</em></div>
-      <canvas id="ch-steps" height="160"></canvas>
-    </div>
-    <!-- ANALYSE HEBDO IA -->
-    <div class="card" style="background:linear-gradient(135deg,rgba(168,85,247,.08),rgba(249,115,22,.05));border-color:rgba(168,85,247,.2)">
-      <div class="ct">🤖 Analyse hebdomadaire IA <em>— bilan + objectif semaine</em></div>
-      <div style="font-size:11px;color:var(--tx2);line-height:1.6;margin-bottom:12px">Claude analyse ta semaine écoulée (séances, récup, sommeil) et génère 3 points clés + l'objectif de la semaine à venir.</div>
-      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-        <button onclick="weeklyAnalyze()" id="weekly-ai-btn" style="background:linear-gradient(135deg,var(--pu),var(--or));border:none;padding:10px 20px;border-radius:8px;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer">✨ Analyser cette semaine</button>
-        <button onclick="weeklySetupNotif()" id="weekly-notif-btn" style="background:var(--bg3);border:1px solid var(--bd2);padding:10px 14px;border-radius:8px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer">🔔 Chaque lundi</button>
-      </div>
-      <div id="weekly-ai-loading" style="display:none;text-align:center;padding:16px"><div style="width:24px;height:24px;border:2px solid var(--bd2);border-top-color:var(--pu);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 8px"></div><div style="font-size:10px;color:var(--tx3);font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase">Analyse en cours…</div></div>
-      <div id="weekly-ai-result" style="display:none"></div>
-    </div>
-  </div>
-
-  <!-- HISTORIQUE TABLE -->
-  <div class="card">
-    <div class="ct">📋 Historique santé <em>— 30 derniers jours</em></div>
-    <div style="overflow-x:auto">
-      <table class="ltbl" id="health-table">
-        <thead><tr><th>Date</th><th>Sommeil</th><th>Profond</th><th>FC Repos</th><th>HRV</th><th>Pas</th><th>Ressenti</th><th>Score Récup</th></tr></thead>
-        <tbody id="health-body"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
 <script>
 // ===== CONSTANTS =====
 const START = new Date(2026,1,23);
@@ -1159,6 +891,14 @@ const SPECIAL = {
   "2026-07-01":{label:"😴 Repos J+3",type:"rest"},
   "2026-07-02":{label:"🚴 Vélo 40' souple J+4",type:"taper"},
   "2026-07-03":{label:"🏃 Footing 35' Z1 J+5",type:"taper"},
+  // Transition récup → Phase 2 (6-10 juillet)
+  "2026-07-04":{label:"🏃 Footing 40min Z1 — première séance Phase 2",type:"taper"},
+  "2026-07-05":{label:"🏃 Sortie longue 2h00 souple — reprise Phase 2",type:"taper"},
+  "2026-07-06":{label:"🏃 35' Footing Z1 + PPG 15' — lundi Phase 2",type:"taper"},
+  "2026-07-07":{label:"⚡ Qualité — 6×600m allure seuil + 15' EF",type:"taper"},
+  "2026-07-08":{label:"🏃 50' EF Z2 terrain varié — mercredi Phase 2",type:"taper"},
+  "2026-07-09":{label:"🏃 EF 1h30 bâtons — spécifique UT2P",type:"taper"},
+  "2026-07-10":{label:"😴 Repos — préparation mentale Bloc B2B #1",type:"rest"},
   // Blocs B2B
   "2026-07-11":{label:"🔥 BLOC B2B #1 · J1 — 3h Trail D+",type:"bloc"},
   "2026-07-12":{label:"🔥 BLOC B2B #1 · J2 — 3h30 Rando-course bâtons",type:"bloc"},
@@ -1364,14 +1104,14 @@ function plan(d){
       if(dU<=7)  return{type:'SORTIE LONGUE',desc:"30' jogging très souple — jambes fraîches pour demain",col:'pu'};
       if(dU<=14) return{type:'SORTIE LONGUE',desc:"1h00 EF souple + 4×100m — activation sans fatigue",col:'pu'};
       if(dU<=21) return{type:'SORTIE LONGUE',desc:"1h45 EF terrain varié — dernière sortie longue · rester frais",col:'bl'};
-      // Semaine post-Bloc B2B #3 : assimilation
-      if(dU<=35) return{type:'SORTIE LONGUE',desc:"5h30 · TEMPS SUR LES JAMBES · Nutrition race-day + Pacing + Bâtons · simuler km 60→90",col:'rd'};
-      // Entre Bloc 2 et Bloc 3
-      if(dU<=49) return{type:'SORTIE LONGUE',desc:"3h30 · Terrain D+ · marche/course · tester la transition sur jambes fatiguées",col:'or'};
+      // Post-Bloc 3 (5-6 sept) → affûtage : assimilation légère seulement
+      if(dU<=35) return{type:'SORTIE LONGUE',desc:"2h00 · Assimilation Bloc 3 · terrain souple · jambes fraîches",col:'bl'};
+      // Entre Bloc 2 (8-9 août) et Bloc 3 (5-6 sept) : MAX 2h30 — garder du jus !
+      if(dU<=49) return{type:'SORTIE LONGUE',desc:"2h30 · Consolidation · D+ modéré · marche/course · garder du jus pour Bloc 3",col:'or'};
       // Post-Bloc B2B #1, pré-Bloc B2B #2
-      if(dU<=63) return{type:'SORTIE LONGUE',desc:"4h00 · Trail progressif · focus allure de sortie longue Z2 + marche en montée",col:'or'};
-      // Début phase 2 (post-LHUT récup)
-      if(dU<=77) return{type:'SORTIE LONGUE',desc:"2h30 · Remise en route · terrain souple · écoute des jambes après LHUT",col:'bl'};
+      if(dU<=63) return{type:'SORTIE LONGUE',desc:"4h00 · Trail progressif · SL Z2 + marche montée + bâtons",col:'or'};
+      // Début phase 2 (post-récup 30km)
+      if(dU<=77) return{type:'SORTIE LONGUE',desc:"2h30 · Remise en route Phase 2 · terrain souple · écoute des jambes",col:'bl'};
       if(dU<=91) return{type:'SORTIE LONGUE',desc:"2h00 · Reprise progressive · Z2 strict · pas de D+ inutile",col:'bl'};
       return{type:'SORTIE LONGUE',desc:"1h30 · Footing souple post-LHUT · récupération active",col:'bl'};
     }
@@ -1471,12 +1211,13 @@ function renderCharts(){
 
   // Countdowns
   const dL=Math.max(0,Math.ceil((LHUT-NOW)/864e5)), dU=Math.max(0,Math.ceil((UT3P-NOW)/864e5));
-  document.getElementById('d-lhut').textContent=dL;
+  const elDL=document.getElementById('d-lhut'); if(elDL) elDL.textContent=dL;
   document.getElementById('d-ut3p').textContent=dU;
   const eL=Math.ceil((NOW-START)/864e5), tL=Math.ceil((LHUT-START)/864e5), tU=Math.ceil((UT3P-START)/864e5);
   const pL=Math.min(100,Math.max(0,Math.round(eL/tL*100)));
   const pU=Math.min(100,Math.max(0,Math.round(eL/tU*100)));
-  document.getElementById('p-lhut').textContent=pL+'%'; document.getElementById('b-lhut').style.width=pL+'%';
+  const elPL=document.getElementById('p-lhut'); if(elPL) elPL.textContent=pL+'%';
+  const elBL=document.getElementById('b-lhut'); if(elBL) elBL.style.width=pL+'%';
   document.getElementById('p-ut3p').textContent=pU+'%'; document.getElementById('b-ut3p').style.width=pU+'%';
 
   // TSB today
@@ -1754,8 +1495,8 @@ function renderCal(){
     if(sp){if(sp.type==='race')cc+=' sp-r';else if(sp.type==='major')cc+=' sp-m';else if(sp.type==='bloc')cc+=' sp-b';else if(sp.type==='goal')cc+=' sp-g';else if(sp.type==='night')cc+=' sp-n';else if(sp.type==='rest')cc+=' sp-rest';}
     cell.className=cc;
     const col=sp?(sp.type==='bloc'?'#ef4444':sp.type==='night'?'#a855f7':sp.type==='race'?'#3b82f6':sp.type==='taper'?'#a855f7':sp.type==='rest'?'#535868':'#f97316'):(tc[p.col]||'#3f4455');
-    const pace = vmaGetPaceForType(sp?'':p.type);
-    cell.innerHTML=`<div class="dn-num">${cur.getDate()}</div><div class="dtyp" style="color:${col}">${sp?sp.type.toUpperCase():p.type}</div><div class="ddsc">${sp?sp.label:p.desc}</div>${pace&&!sp?`<div style="font-size:7px;color:rgba(59,130,246,.7);font-family:'JetBrains Mono',monospace;margin-top:1px">${pace}/km</div>`:''}`;
+
+    cell.innerHTML=`<div class="dn-num">${cur.getDate()}</div><div class="dtyp" style="color:${col}">${sp?sp.type.toUpperCase():p.type}</div><div class="ddsc">${sp?sp.label:p.desc}</div>`;
     if(sess&&sess.done) cell.innerHTML+=`<div class="dd gn"></div>`;
     if(STRAVA[ds]&&!userSess[ds]) cell.innerHTML+=`<div class="dd2"></div>`;
     const dc2=new Date(cur);
@@ -2395,7 +2136,14 @@ function notifLoadSettings(){
 function notifSave(){ localStorage.setItem('ut3p_notif', JSON.stringify(notifSettings)); }
 
 async function notifRequestPermission(){
-  if(!('Notification' in window)){ alert('Ton navigateur ne supporte pas les notifications.'); return false; }
+  if(!('Notification' in window)){ return false; }
+  // On iOS Safari, notifications only work when installed as PWA
+  const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  if(isIOS && !isStandalone){
+    alert('📱 Sur iPhone, les notifications fonctionnent uniquement si l\'app est installée.\n\nDans Safari → icône Partager → "Sur l\'écran d\'accueil" → puis réactive les notifs depuis l\'app installée.');
+    return false;
+  }
   if(Notification.permission==='granted') return true;
   const perm = await Notification.requestPermission();
   return perm === 'granted';
@@ -2505,6 +2253,17 @@ function notifUpdateBanner(){
   const timeInput = document.getElementById('notif-time-input');
   if(!btn) return;
   const active = notifSettings.enabled && Notification.permission==='granted';
+  // On iOS Safari (not PWA), show install hint instead
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+  if(isIOS && !isStandalone){
+    btn.textContent = '📲 Installer pour notifs';
+    btn.style.color = 'var(--yw)';
+    btn.style.borderColor = 'rgba(251,191,36,.4)';
+    btn.classList.remove('on');
+    if(timeInput) timeInput.style.display = 'none';
+    return;
+  }
   if(active){
     btn.textContent='🔔 Notifs ON'; btn.classList.add('on');
   } else {
@@ -2553,1205 +2312,16 @@ function notifUpdateTime(val){
   notifSave();
   notifScheduleNext();
 }
-// ===== APPLE HEALTH =====
-let healthData = {}; // {date: {sleep, deep, rhr, hrv, steps, feel, qual}}
-let healthFeel = 0, healthQual = 0;
-
-function healthLoad(){ try{ healthData=JSON.parse(localStorage.getItem('ut3p_health_v2')||'{}'); }catch(e){ healthData={}; } }
-function healthSave(){ localStorage.setItem('ut3p_health_v2', JSON.stringify(healthData)); }
-
-function setHealthFeel(v){ healthFeel=v; document.querySelectorAll('#h-feel-row .rb').forEach((b,i)=>b.classList.toggle('on',i+1===v)); }
-function setHealthQual(v){ healthQual=v; document.querySelectorAll('#h-qual-row .rb').forEach((b,i)=>b.classList.toggle('on',i+1===v)); }
-
-function healthSaveManual(){
-  const date=document.getElementById('h-date').value;
-  const sleep=parseFloat(document.getElementById('h-sleep').value)||0;
-  const deep=parseFloat(document.getElementById('h-deep').value)||0;
-  const rhr=parseInt(document.getElementById('h-rhr').value)||0;
-  const hrv=parseInt(document.getElementById('h-hrv').value)||0;
-  const steps=parseInt(document.getElementById('h-steps').value)||0;
-  if(!date){ alert('Entre une date.'); return; }
-  healthData[date]={sleep,deep,rhr,hrv,steps,feel:healthFeel,qual:healthQual};
-  healthSave(); healthRender();
-  // Reset
-  document.getElementById('h-sleep').value='';
-  document.getElementById('h-deep').value='';
-  document.getElementById('h-rhr').value='';
-  document.getElementById('h-hrv').value='';
-  document.getElementById('h-steps').value='';
-  setHealthFeel(0); setHealthQual(0);
-}
-
-function healthHandleDrop(ev){
-  ev.preventDefault();
-  document.getElementById('health-dz').classList.remove('drag');
-  // Support dropping a folder or multiple files
-  const files = [];
-  const items = ev.dataTransfer.items;
-  if(items){
-    for(let i=0;i<items.length;i++){
-      const entry = items[i].webkitGetAsEntry ? items[i].webkitGetAsEntry() : null;
-      if(entry && entry.isDirectory){
-        // Read directory
-        const reader = entry.createReader();
-        reader.readEntries(entries=>{
-          const filePromises = entries
-            .filter(e=>e.isFile && (e.name.endsWith('.csv')||e.name.endsWith('.json')))
-            .map(e=>new Promise(res=>e.file(res)));
-          Promise.all(filePromises).then(fs=>healthHandleFiles(fs));
-        });
-        return;
-      } else if(items[i].kind==='file'){
-        files.push(items[i].getAsFile());
-      }
-    }
-  } else {
-    for(let i=0;i<ev.dataTransfer.files.length;i++) files.push(ev.dataTransfer.files[i]);
-  }
-  if(files.length) healthHandleFiles(files);
-}
-
-function healthHandleFile(file){
-  if(!file) return;
-  healthHandleFiles([file]);
-}
-
-async function healthHandleFiles(files){
-  if(!files || !files.length) return;
-  const dz = document.getElementById('health-dz');
-  if(dz) dz.innerHTML = `<div style="font-size:20px;margin-bottom:6px">⏳</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--tx3)">Import en cours… ${files.length} fichier(s)</div>`;
-
-  let totalImported = 0;
-  const results = {sleep:0, rhr:0, hrv:0, steps:0};
-
-  for(const file of files){
-    if(!file) continue;
-    const isCsv = file.name.toLowerCase().endsWith('.csv');
-    const text = await new Promise((res,rej)=>{
-      const r = new FileReader();
-      r.onload = e => res(e.target.result);
-      r.onerror = rej;
-      r.readAsText(file, 'UTF-8');
-    });
-    if(isCsv) healthParseCSVByFilename(text, file.name.toLowerCase());
-    else healthParseJSONSilent(text);
-  }
-
-  healthSave(); healthRender();
-
-  // Restore drop zone
-  if(dz) dz.innerHTML = `<div style="font-size:28px;margin-bottom:8px">✅</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:var(--gn)">${files.length} fichier(s) importés</div><div style="font-size:10px;color:var(--tx3);margin-top:4px">Clique pour importer d'autres fichiers</div>`;
-
-  const sleepN = Object.values(healthData).filter(e=>e.sleep).length;
-  const rhrN   = Object.values(healthData).filter(e=>e.rhr).length;
-  const hrvN   = Object.values(healthData).filter(e=>e.hrv).length;
-  const stepsN = Object.values(healthData).filter(e=>e.steps).length;
-  alert(`✅ Import terminé — ${files.length} fichier(s)\n\n😴 Sommeil : ${sleepN} nuits\n❤️ FC repos : ${rhrN} jours\n📈 HRV : ${hrvN} jours\n👟 Pas : ${stepsN} jours`);
-}
-
-function _healthParseCSV(text, showAlert){
-  try{
-    const lines = text.trim().split('\n');
-    if(lines.length < 2){ if(showAlert) alert('⚠️ Fichier CSV vide ou invalide.'); return; }
-
-    // Detect separator
-    const sep = lines[0].includes(';') ? ';' : ',';
-    const headers = lines[0].split(sep).map(h => h.trim().replace(/^"|"$/g,'').toLowerCase());
-
-    let imported = 0;
-    const sleepSegments = {}; // date → total hours
-
-    // Show headers for debug
-    const debugHeaders = headers.slice(0,10).join(' | ');
-
-    lines.slice(1).forEach(line => {
-      if(!line.trim()) return;
-      const cols = line.split(sep).map(c => c.trim().replace(/^"|"$/g,''));
-      const get = (...keys) => {
-        for(const k of keys){
-          const idx = headers.indexOf(k.toLowerCase());
-          if(idx >= 0 && cols[idx] && cols[idx] !== '') return cols[idx];
-        }
-        return '';
-      };
-
-      // Date extraction
-      const startRaw = get('startdate','start date','start_date','startdatetime','date');
-      const endRaw   = get('enddate','end date','end_date','enddatetime');
-      const date = startRaw ? startRaw.slice(0,10) : '';
-      if(!date) return;
-
-      // Type/category
-      const type = get('type','category','value','categoryvalue','sleepstage','stage','hkcategoryvalue').toLowerCase();
-      const name = get('name','metric','identifier','hkmetric','measurename').toLowerCase();
-
-      // ── SLEEP ──
-      const isSleepMetric = name.includes('sleep') || type.includes('sleep') || type.includes('asleep')
-                          || name.includes('asleep') || headers.some(h=>h.includes('sleep'));
-      if(isSleepMetric){
-        const isAwake = type.includes('awake') || type === '0' || type.includes('inbed') || type.includes('in bed');
-        if(!isAwake){
-          // Calculate duration from start/end
-          let dh = 0;
-          if(startRaw && endRaw){
-            dh = (new Date(endRaw) - new Date(startRaw)) / 3600000;
-          } else {
-            const raw = parseFloat(get('value','qty','duration','hours','minutes','seconds')||0);
-            dh = raw > 43200 ? raw/3600 : raw > 24 ? raw/60 : raw;
-          }
-          if(dh > 0) sleepSegments[date] = (sleepSegments[date]||0) + dh;
-          const stageType = type;
-          if(stageType.includes('deep')){
-            if(!healthData[date]) healthData[date]={};
-            healthData[date].deep = Math.round(((healthData[date].deep||0) + dh)*10)/10;
-          }
-        }
-        return;
-      }
-
-      const val = parseFloat(get('value','qty','quantity','amount')||0);
-
-      // ── FC REPOS ──
-      if(name.includes('restingheart') || name.includes('resting heart') || name.includes('resting_heart')){
-        if(!healthData[date]) healthData[date]={};
-        healthData[date].rhr = val;
-        imported++;
-      }
-      // ── HRV ──
-      else if(name.includes('hrv') || name.includes('heartratevariability') || name.includes('heart rate variability')){
-        if(!healthData[date]) healthData[date]={};
-        healthData[date].hrv = val;
-        imported++;
-      }
-      // ── PAS ──
-      else if(name.includes('stepcount') || name.includes('step count') || name === 'steps'){
-        if(!healthData[date]) healthData[date]={};
-        healthData[date].steps = Math.max(healthData[date].steps||0, parseInt(val));
-        imported++;
-      }
-    });
-
-    // Apply sleep totals
-    let sleepNights = 0;
-    Object.entries(sleepSegments).forEach(([date,h])=>{
-      if(h >= 0.5 && h <= 16){
-        if(!healthData[date]) healthData[date]={};
-        healthData[date].sleep = Math.round(h*10)/10;
-        sleepNights++;
-        imported++;
-      }
-    });
-
-    if(showAlert){ healthSave(); healthRender(); alert(`✅ Import CSV\n😴 Sommeil : ${sleepNights} nuits\n❤️ FC : ${Object.values(healthData).filter(e=>e.rhr).length}j\n👟 Pas : ${Object.values(healthData).filter(e=>e.steps).length}j\n\nColonnes: ${debugHeaders}`); }
-
-  }catch(e){
-    if(showAlert) alert(`⚠️ Erreur CSV : ${e.message}`);
-  }
-}
-
-// Silent versions (no alert) for multi-file import
-function healthParseJSONSilent(text){ _healthParseJSON(text, false); }
-function healthParseCSVSilent(text){ _healthParseCSV(text, false); }
-function healthParseJSON(text){ _healthParseJSON(text, true); }
-function healthParseCSV(text){ _healthParseCSV(text, true); }
-
-// Filename-based parser — Health Auto Export uses filename as metric name
-function healthParseCSVByFilename(text, filename){
-  try{
-    const lines = text.trim().split('\n');
-    if(lines.length < 2) return;
-    const sep = lines[0].includes(';') ? ';' : ',';
-    const headers = lines[0].split(sep).map(h=>h.trim().replace(/^"|"$/g,'').toLowerCase());
-
-    // Detect metric from filename (English AND French)
-    const fn = filename;
-    const isSleep   = fn.includes('sleep') || fn.includes('sommeil') || fn.includes('analyse_du_sommeil') || fn.includes('analyse du sommeil');
-    const isRhr     = fn.includes('resting') || fn.includes('resting heart') || fn.includes('fc_repos') || fn.includes('fréquence cardiaque au repos') || fn.includes('frequence cardiaque au repos');
-    const isHrv     = fn.includes('hrv') || fn.includes('variability') || fn.includes('variabilit') || fn.includes('fr_quence_cardiaque') || (fn.includes('variabilite') && fn.includes('cardiaque'));
-    const isSteps   = fn.includes('step') || fn.includes('pas');
-    const isDeep    = fn.includes('deep') || fn.includes('profond');
-
-    // If none detected from filename, fall back to column-based detection
-    if(!isSleep && !isRhr && !isHrv && !isSteps){
-      _healthParseCSV(text, false);
-      return;
-    }
-
-    const getDate = cols => {
-      for(const key of ['date/time','date','startdate','start date','datetime','startdatetime']){
-        const idx = headers.indexOf(key);
-        if(idx >= 0 && cols[idx]) return cols[idx].slice(0,10);
-      }
-      return '';
-    };
-    const getVal = cols => {
-      for(const key of ['qty','value','quantity','amount','count']){
-        const idx = headers.indexOf(key);
-        if(idx >= 0 && cols[idx]) return cols[idx];
-      }
-      return '';
-    };
-    const getEnd = cols => {
-      for(const key of ['enddate','end date','enddatetime']){
-        const idx = headers.indexOf(key);
-        if(idx >= 0 && cols[idx]) return cols[idx];
-      }
-      return '';
-    };
-
-    const sleepSegments = {};
-
-    lines.slice(1).forEach(line => {
-      if(!line.trim()) return;
-      const cols = line.split(sep).map(c=>c.trim().replace(/^"|"$/g,''));
-      const date = getDate(cols);
-      if(!date) return;
-      const valRaw = getVal(cols);
-      const val = parseFloat(valRaw) || 0;
-
-      if(isSleep || isDeep){
-        // FORMAT A : pre-aggregated columns (Health Auto Export "Analyse du Sommeil")
-        // Columns: Date/Time, Start, End, Total Sleep (hr), Core (hr), Deep (hr), REM (hr), Awake (hr)...
-        const getCol = (...keys) => {
-          for(const k of keys){
-            const idx = headers.findIndex(h=>h.includes(k));
-            if(idx>=0 && cols[idx]) return parseFloat(cols[idx])||0;
-          }
-          return 0;
-        };
-        const totalSleep = getCol('total sleep','total');
-        const deepSleep  = getCol('deep');
-        const coreSleep  = getCol('core');
-        const remSleep   = getCol('rem');
-
-        if(totalSleep > 0){
-          // Pre-aggregated: use directly
-          if(!healthData[date]) healthData[date]={};
-          healthData[date].sleep = Math.round(totalSleep*10)/10;
-          if(deepSleep > 0)
-            healthData[date].deep = Math.round(deepSleep*10)/10;
-          return;
-        }
-
-        // FORMAT B : segments with stage codes (raw Apple Health export)
-        const stageIdx = headers.findIndex(h=>h==='value'||h==='stage'||h.includes('sleepstage'));
-        const stage = (stageIdx>=0 ? cols[stageIdx] : '').toLowerCase().trim();
-        const isAwake = stage==='0' || stage==='2'
-          || stage.includes('awake') || stage.includes('inbed') || stage.includes('in bed');
-        if(isAwake) return;
-        const isDeepStage = stage==='4' || stage.includes('deep');
-        const startRaw = getDate(cols);
-        const endRaw = getEnd(cols);
-        let dh = 0;
-        if(startRaw && endRaw){
-          const ms = new Date(endRaw) - new Date(startRaw);
-          if(ms > 0) dh = ms / 3600000;
-        }
-        if(dh <= 0 && val > 0){
-          dh = val > 43200 ? val/3600 : val > 24 ? val/60 : val;
-        }
-        if(dh > 0 && dh < 12){
-          sleepSegments[date] = (sleepSegments[date]||0) + dh;
-          if(isDeepStage || isDeep){
-            if(!healthData[date]) healthData[date]={};
-            healthData[date].deep = Math.round(((healthData[date].deep||0)+dh)*10)/10;
-          }
-        }
-      } else if(isRhr && val > 0){
-        if(!healthData[date]) healthData[date]={};
-        if(!healthData[date].rhr || val < healthData[date].rhr) // take lowest (most rested)
-          healthData[date].rhr = Math.round(val);
-      } else if(isHrv){
-        // HRV column can be named "Variabilité de la Fréquence Cardiaque (ms)" in French
-        let hrvVal = val;
-        if(!hrvVal){
-          const hrvIdx = headers.findIndex(h=>h.includes('variabilit')||h.includes('hrv')||h.includes('variab'));
-          if(hrvIdx>=0) hrvVal = parseFloat(cols[hrvIdx])||0;
-        }
-        if(hrvVal > 0){
-          if(!healthData[date]) healthData[date]={};
-          // Average multiple readings per day
-          if(healthData[date].hrv){
-            healthData[date]._hrvSum = (healthData[date]._hrvSum||healthData[date].hrv) + hrvVal;
-            healthData[date]._hrvCount = (healthData[date]._hrvCount||1) + 1;
-            healthData[date].hrv = Math.round(healthData[date]._hrvSum / healthData[date]._hrvCount);
-          } else {
-            healthData[date].hrv = Math.round(hrvVal);
-          }
-        }
-      } else if(isSteps && val > 0){
-        if(!healthData[date]) healthData[date]={};
-        healthData[date].steps = Math.max(healthData[date].steps||0, Math.round(val));
-      }
-    });
-
-    // Apply sleep totals
-    if(isSleep){
-      Object.entries(sleepSegments).forEach(([date,h])=>{
-        if(h >= 0.5 && h <= 16){
-          if(!healthData[date]) healthData[date]={};
-          healthData[date].sleep = Math.round(h*10)/10;
-        }
-      });
-    }
-  }catch(e){ console.warn('CSV parse error', filename, e.message); }
-}
-
-function _healthParseJSON(text, showAlert){
-  try{
-    const data = JSON.parse(text);
-    let imported = 0;
-    const debugLines = [];
-
-    // ── DEBUG : show structure ──
-    const showStructure = (obj, depth=0, prefix='') => {
-      if(depth > 3) return;
-      if(Array.isArray(obj)){
-        debugLines.push(`${prefix}Array[${obj.length}]`);
-        if(obj.length > 0) showStructure(obj[0], depth+1, prefix+'  [0] ');
-      } else if(obj && typeof obj === 'object'){
-        Object.keys(obj).slice(0,12).forEach(k => {
-          const v = obj[k];
-          if(Array.isArray(v)) debugLines.push(`${prefix}${k}: Array[${v.length}]${v[0]?` → first: {${Object.keys(v[0]).slice(0,5).join(',')}}`  :''}`);
-          else if(v && typeof v === 'object') debugLines.push(`${prefix}${k}: {${Object.keys(v).slice(0,6).join(',')}}`);
-          else debugLines.push(`${prefix}${k}: ${String(v).slice(0,40)}`);
-        });
-      }
-    };
-    showStructure(data);
-
-    const getDate = e => {
-      const raw = e.startDate || e.endDate || e.date || e.dateTime || e.creationDate || '';
-      return raw.slice(0,10);
-    };
-
-    const merge = (date, key, val) => {
-      if(!date || isNaN(val)) return;
-      const v = parseFloat(val);
-      if(v <= 0) return;
-      if(!healthData[date]) healthData[date] = {};
-      if(key==='steps') healthData[date][key] = Math.max(healthData[date][key]||0, v);
-      else healthData[date][key] = v;
-      imported++;
-    };
-
-    // ── FORMAT 1 : metrics array ──
-    if(data.data?.metrics && Array.isArray(data.data.metrics)){
-      debugLines.push(`→ FORMAT metrics array (${data.data.metrics.length})`);
-
-      // First pass: collect all sleep segments to sum by night
-      const sleepSegments = {}; // {date: totalSeconds}
-
-      data.data.metrics.forEach(metric=>{
-        const name = (metric.name||metric.identifier||'').toLowerCase();
-        const arr = metric.data||[];
-        debugLines.push(`  metric: "${name}" [${arr.length}]${arr[0]?` keys:{${Object.keys(arr[0]).join(',')}}`:''}`);
-
-        if(name.includes('sleep') || name.includes('asleep') || name.includes('inbed')){
-          arr.forEach(e=>{
-            // Calculate duration from startDate to endDate if available
-            const start = e.startDate || e.startdate || '';
-            const end = e.endDate || e.enddate || '';
-            const date = (start||e.date||'').slice(0,10);
-            if(!date) return;
-
-            let durationH = 0;
-            if(start && end){
-              const ms = new Date(end) - new Date(start);
-              durationH = ms / 3600000; // ms to hours
-            } else {
-              // Fallback: use qty/value field
-              const raw = parseFloat(e.qty ?? e.Qty ?? e.value ?? 0);
-              durationH = raw > 43200 ? raw/3600 : raw > 24 ? raw/60 : raw;
-            }
-
-            // Only count actual sleep stages, not "in bed" or "awake"
-            const stageVal = (e.value||e.stage||e.sleepStage||e.name||'').toString().toLowerCase();
-            const isAwake = stageVal.includes('awake') || stageVal.includes('inbed') || stageVal === '0';
-            const isAsleep = !stageVal || stageVal.includes('asleep') || stageVal.includes('core')
-                           || stageVal.includes('deep') || stageVal.includes('rem')
-                           || stageVal.includes('light') || stageVal === '1' || stageVal === '2' || stageVal === '3';
-
-            // For deep sleep specifically
-            if(name.includes('deep') || stageVal.includes('deep')){
-              if(!healthData[date]) healthData[date]={};
-              healthData[date].deep = (healthData[date].deep||0) + durationH;
-              imported++;
-            }
-            // Total sleep
-            if(!isAwake && durationH > 0){
-              sleepSegments[date] = (sleepSegments[date]||0) + durationH;
-            }
-          });
-          // Apply sleep totals
-          Object.entries(sleepSegments).forEach(([date,h])=>{
-            if(h > 0.5 && h < 16){ // sanity check: 0.5h to 16h
-              if(!healthData[date]) healthData[date]={};
-              healthData[date].sleep = Math.round(h*10)/10;
-              imported++;
-            }
-          });
-
-        } else if(name.includes('hrv') || name.includes('heartratevariability')){
-          arr.forEach(e=>{
-            const date = getDate(e);
-            const val = parseFloat(e.qty??e.Qty??e.value??0);
-            merge(date,'hrv',val);
-          });
-        } else if(name.includes('restingheart') || name.includes('resting_heart') || name === 'resting heart rate'){
-          arr.forEach(e=>{
-            const date = getDate(e);
-            const val = parseFloat(e.qty??e.Qty??e.value??0);
-            merge(date,'rhr',val);
-          });
-        } else if(name.includes('stepcount') || name === 'steps' || name === 'step count'){
-          arr.forEach(e=>{
-            const date = getDate(e);
-            const val = parseInt(e.qty??e.Qty??e.value??0);
-            merge(date,'steps',val);
-          });
-        }
-      });
-    }
-
-    // ── FORMAT 2 : named keys ──
-    if(data.data && !data.data.metrics){
-      debugLines.push(`→ FORMAT named keys: ${Object.keys(data.data).slice(0,10).join(', ')}`);
-      const d = data.data;
-      // All possible sleep key names Health Auto Export uses
-      const sleepKeys = ['sleepAnalysis','HKCategoryTypeIdentifierSleepAnalysis','sleep','Sleep',
-        'sleepDuration','SleepDuration','timeInBed','timeAsleep','sleepInBed'];
-      sleepKeys.forEach(k=>{
-        if(!d[k]) return;
-        debugLines.push(`  sleep key "${k}" → ${Array.isArray(d[k])?d[k].length+' entries':'not array'}`);
-        (Array.isArray(d[k])?d[k]:[d[k]]).forEach(e=>{
-          const date = getDate(e);
-          const raw = parseFloat(e.value ?? e.qty ?? e.Qty ?? e.duration ?? 0);
-          // Convert: >43200=seconds, >24=minutes(?), else hours
-          const h = raw > 43200 ? raw/3600 : raw > 24 ? raw/60 : raw;
-          merge(date, 'sleep', h);
-        });
-      });
-      // HRV
-      ['heartRateVariabilitySDNN','HKQuantityTypeIdentifierHeartRateVariabilitySDNN','hrv','HRV'].forEach(k=>{
-        (d[k]||[]).forEach(e => merge(getDate(e), 'hrv', parseFloat(e.value||e.qty||0)));
-      });
-      // RHR
-      ['restingHeartRate','HKQuantityTypeIdentifierRestingHeartRate','restingHR'].forEach(k=>{
-        (d[k]||[]).forEach(e => merge(getDate(e), 'rhr', parseFloat(e.value||e.qty||0)));
-      });
-      // Steps
-      ['stepCount','HKQuantityTypeIdentifierStepCount','steps','Steps'].forEach(k=>{
-        (d[k]||[]).forEach(e => merge(getDate(e), 'steps', parseInt(e.value||e.qty||0)));
-      });
-    }
-
-    // ── FORMAT 3 : flat array ──
-    if(Array.isArray(data)){
-      debugLines.push(`→ FORMAT flat array [${data.length}]`);
-      data.forEach(e=>{
-        const date = getDate(e);
-        if(!date) return;
-        const s = parseFloat(e.sleep||e.sleepDuration||e.totalSleep||e.SleepDuration||0);
-        const h = parseFloat(e.hrv||e.heartRateVariability||e.HRV||0);
-        const r = parseFloat(e.rhr||e.restingHeartRate||e.restingHR||0);
-        const st = parseInt(e.steps||e.stepCount||e.Steps||0);
-        const sh = s > 43200 ? s/3600 : s > 24 ? s/60 : s;
-        if(sh) merge(date,'sleep',sh);
-        if(h) merge(date,'hrv',h);
-        if(r) merge(date,'rhr',r);
-        if(st) merge(date,'steps',st);
-      });
-    }
-
-    // ── FORMAT 4 : root-level date keys ──
-    const dateKeyRe = /^\d{4}-\d{2}-\d{2}$/;
-    if(!Array.isArray(data) && typeof data === 'object'){
-      const dateKeys = Object.keys(data).filter(k => dateKeyRe.test(k));
-      if(dateKeys.length > 0){
-        debugLines.push(`→ FORMAT date keys (${dateKeys.length})`);
-        dateKeys.forEach(date=>{
-          const e = data[date];
-          if(e.sleep) merge(date,'sleep',parseFloat(e.sleep));
-          if(e.hrv) merge(date,'hrv',parseFloat(e.hrv));
-          if(e.rhr||e.restingHeartRate) merge(date,'rhr',parseFloat(e.rhr||e.restingHeartRate));
-          if(e.steps) merge(date,'steps',parseInt(e.steps));
-        });
-      }
-    }
-
-    healthSave(); healthRender();
-
-    const sleepDays = Object.values(healthData).filter(e=>e.sleep).length;
-    const msg = imported===0
-      ? `⚠️ 0 valeurs importées.\n\nStructure du fichier :\n${debugLines.slice(0,15).join('\n')}`
-      : `✅ ${imported} valeurs importées\n😴 Sommeil : ${sleepDays} nuits\n❤️ FC repos : ${Object.values(healthData).filter(e=>e.rhr).length} jours\n📈 HRV : ${Object.values(healthData).filter(e=>e.hrv).length} jours\n👟 Pas : ${Object.values(healthData).filter(e=>e.steps).length} jours`;
-    if(showAlert){ healthSave(); healthRender(); alert(msg); }
-
-  }catch(e){
-    if(showAlert) alert(`⚠️ Erreur JSON : ${e.message}`);
-  }
-}
-
-function _healthParseCSV(text, showAlert){
-  try{
-    const lines = text.trim().split('\n');
-    if(lines.length < 2){ if(showAlert) alert('⚠️ Fichier CSV vide.'); return; }
-    const sep = lines[0].includes(';') ? ';' : ',';
-    const headers = lines[0].split(sep).map(h=>h.trim().replace(/^"|"$/g,'').toLowerCase());
-    const debugHeaders = headers.slice(0,8).join(' | ');
-    let imported = 0;
-    const sleepSegments = {};
-
-    lines.slice(1).forEach(line=>{
-      if(!line.trim()) return;
-      const cols = line.split(sep).map(c=>c.trim().replace(/^"|"$/g,''));
-      const get = (...keys)=>{ for(const k of keys){ const idx=headers.indexOf(k.toLowerCase()); if(idx>=0&&cols[idx]) return cols[idx]; } return ''; };
-      const startRaw=get('startdate','start date','start_date','date');
-      const endRaw=get('enddate','end date','end_date');
-      const date=startRaw?startRaw.slice(0,10):'';
-      if(!date) return;
-      const type=(get('type','category','value','sleepstage','stage','hkcategoryvalue')||'').toLowerCase();
-      const name=(get('name','metric','identifier','hkmetric')||'').toLowerCase();
-      const isSleep=name.includes('sleep')||type.includes('sleep')||type.includes('asleep');
-      if(isSleep){
-        const isAwake=type.includes('awake')||type==='0'||type.includes('inbed');
-        if(!isAwake){
-          let dh=0;
-          if(startRaw&&endRaw){ dh=(new Date(endRaw)-new Date(startRaw))/3600000; }
-          else{ const raw=parseFloat(get('value','qty','duration')||0); dh=raw>43200?raw/3600:raw>24?raw/60:raw; }
-          if(dh>0){ sleepSegments[date]=(sleepSegments[date]||0)+dh; if(type.includes('deep')){ if(!healthData[date])healthData[date]={}; healthData[date].deep=Math.round(((healthData[date].deep||0)+dh)*10)/10; } }
-        }
-        return;
-      }
-      const val=parseFloat(get('value','qty','quantity')||0);
-      if(name.includes('restingheart')||name.includes('resting heart')){ if(!healthData[date])healthData[date]={}; healthData[date].rhr=val; imported++; }
-      else if(name.includes('hrv')||name.includes('heartratevariability')){ if(!healthData[date])healthData[date]={}; healthData[date].hrv=val; imported++; }
-      else if(name.includes('step')){ if(!healthData[date])healthData[date]={}; healthData[date].steps=Math.max(healthData[date].steps||0,parseInt(val)); imported++; }
-    });
-
-    let sleepNights=0;
-    Object.entries(sleepSegments).forEach(([date,h])=>{ if(h>=0.5&&h<=16){ if(!healthData[date])healthData[date]={}; healthData[date].sleep=Math.round(h*10)/10; sleepNights++; imported++; } });
-
-    if(showAlert){ healthSave(); healthRender(); alert(`✅ Import CSV\n😴 Sommeil : ${sleepNights} nuits\n❤️ FC : ${Object.values(healthData).filter(e=>e.rhr).length}j\n👟 Pas : ${Object.values(healthData).filter(e=>e.steps).length}j\n\nColonnes: ${debugHeaders}`); }
-  }catch(e){ if(showAlert) alert(`⚠️ Erreur CSV : ${e.message}`); }
-}
-function healthRecovScore(d){
-  if(!d) return null;
-  let score = 0, totalWeight = 0;
-
-  // Sommeil durée (idéal 7.5-9h) — poids 0.25
-  if(d.sleep){
-    const s = Math.min(100, Math.max(0, d.sleep>=8?100 : d.sleep>=7?85+(d.sleep-7)*15 : d.sleep>=6?60+(d.sleep-6)*25 : d.sleep*10));
-    score += s * 0.25; totalWeight += 0.25;
-  }
-  // Sommeil profond (idéal >1.5h) — poids 0.15
-  if(d.deep){
-    const dp = Math.min(100, d.deep>=1.5?100 : d.deep/1.5*100);
-    score += dp * 0.15; totalWeight += 0.15;
-  }
-  // FC repos vs baseline perso — poids 0.25
-  if(d.rhr){
-    const rhrVals = Object.values(healthData).filter(e=>e.rhr).map(e=>e.rhr);
-    const avgRhr = rhrVals.length ? rhrVals.reduce((a,b)=>a+b)/rhrVals.length : 60;
-    const rhrScore = d.rhr <= avgRhr ? 100 : Math.max(0, 100-(d.rhr-avgRhr)*6);
-    score += rhrScore * 0.25; totalWeight += 0.25;
-  }
-  // HRV vs baseline perso — poids 0.20
-  if(d.hrv){
-    const hrvVals = Object.values(healthData).filter(e=>e.hrv).map(e=>e.hrv);
-    const avgHrv = hrvVals.length ? hrvVals.reduce((a,b)=>a+b)/hrvVals.length : 50;
-    const hrvScore = d.hrv >= avgHrv ? 100 : Math.max(0, (d.hrv/avgHrv)*100);
-    score += hrvScore * 0.20; totalWeight += 0.20;
-  }
-  // Ressenti subjectif — poids 0.15
-  if(d.feel){
-    score += (d.feel/10)*100 * 0.15; totalWeight += 0.15;
-  }
-
-  // Normalize by sum of available weights (not count)
-  if(totalWeight === 0) return null;
-  return Math.min(99, Math.max(1, Math.round(score / totalWeight)));
-}
-
-function healthGetColor(score){
-  if(!score) return 'var(--tx3)';
-  if(score>=80) return 'var(--gn)';
-  if(score>=60) return 'var(--yw)';
-  if(score>=40) return 'var(--or)';
-  return 'var(--rd)';
-}
-
-function healthSaveSettings(){
-  const wake = document.getElementById('wake-time')?.value || '06:30';
-  const goal = parseFloat(document.getElementById('sleep-goal')?.value) || 8;
-  localStorage.setItem('ut3p_health_settings', JSON.stringify({wake, goal}));
-  healthRender();
-}
-
-function healthLoadSettings(){
-  try{
-    const s = JSON.parse(localStorage.getItem('ut3p_health_settings')||'{}');
-    if(s.wake && document.getElementById('wake-time')) document.getElementById('wake-time').value = s.wake;
-    if(s.goal && document.getElementById('sleep-goal')) document.getElementById('sleep-goal').value = s.goal;
-  }catch(e){}
-}
-
-function healthGetSettings(){
-  try{ return JSON.parse(localStorage.getItem('ut3p_health_settings')||'{}'); }
-  catch(e){ return {}; }
-}
-
-function healthGetBedtime(wakeTime, sleepGoal){
-  const [wh, wm] = (wakeTime||'06:30').split(':').map(Number);
-  const totalMins = wh*60 + wm - (sleepGoal||8)*60 - 20; // 20min to fall asleep
-  const bh = ((Math.floor(totalMins/60) % 24) + 24) % 24;
-  const bm = ((totalMins % 60) + 60) % 60;
-  return `${String(bh).padStart(2,'0')}:${String(bm).padStart(2,'0')}`;
-}
-
-function healthRender(){
-  healthLoadSettings();
-  const settings = healthGetSettings();
-  const wakeTime = settings.wake || '06:30';
-  const sleepGoal = parseFloat(settings.goal) || 8;
-  const bedtime = healthGetBedtime(wakeTime, sleepGoal);
-
-  const dates = Object.keys(healthData).sort().reverse();
-  if(!dates.length){ document.getElementById('health-score-card').style.display='none'; return; }
-
-  const today = fmt(NOW);
-  const todayData = healthData[today] || healthData[dates[0]];
-  const isToday = !!healthData[today];
-  const score = healthRecovScore(todayData);
-  const scoreCard = document.getElementById('health-score-card');
-
-  if(todayData && score !== null){
-    scoreCard.style.display = 'block';
-    const col = healthGetColor(score);
-
-    // Background color of main card
-    const bgColors = {gn:'rgba(34,197,94,.1)',yw:'rgba(251,191,36,.1)',or:'rgba(249,115,22,.1)',rd:'rgba(239,68,68,.1)'};
-    const bgKey = score>=80?'gn':score>=60?'yw':score>=40?'or':'rd';
-    document.getElementById('hs-main-card').style.background = `linear-gradient(135deg,${bgColors[bgKey]},transparent)`;
-    document.getElementById('hs-main-card').style.borderColor = col.replace('var(--','rgba(').replace(')',',0.35)').replace('--gn','34,197,94').replace('--yw','251,191,36').replace('--or','249,115,22').replace('--rd','239,68,68');
-
-    document.getElementById('hs-score').textContent = score;
-    document.getElementById('hs-score').style.color = col;
-    document.getElementById('hs-phase-lbl').style.color = col;
-    document.getElementById('hs-phase-lbl').textContent = isToday ? `🍎 Aujourd'hui · ${NOW.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}` : `📅 Dernière donnée · ${new Date(dates[0]+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}`;
-
-    // Verdict
-    const verdicts = [
-      {min:80, emoji:'🟢', title:'Excellente récupération', desc:'Corps parfaitement reposé. Tu peux attaquer une séance intense.'},
-      {min:65, emoji:'🟡', title:'Bonne récupération',     desc:'Forme correcte. Entraînement normal, reste à l\'écoute de ton corps.'},
-      {min:45, emoji:'🟠', title:'Récupération partielle', desc:'Fatigue résiduelle. Privilégie une séance légère ou du vélo souple.'},
-      {min:0,  emoji:'🔴', title:'Récupération insuffisante', desc:'Corps en dette de sommeil ou de récupération. Repos prioritaire aujourd\'hui.'},
-    ];
-    const v = verdicts.find(x => score >= x.min);
-    document.getElementById('hs-verdict').textContent = `${v.emoji} ${v.title}`;
-    document.getElementById('hs-verdict').style.color = col;
-    document.getElementById('hs-advice').textContent = v.desc;
-
-    // Metrics grid
-    const avgRhr = Object.values(healthData).filter(e=>e.rhr).reduce((s,e,_,a)=>s+e.rhr/a.length,0)||0;
-    const avgHrv = Object.values(healthData).filter(e=>e.hrv).reduce((s,e,_,a)=>s+e.hrv/a.length,0)||0;
-    const rhrDiff = todayData.rhr && avgRhr ? todayData.rhr - avgRhr : 0;
-    const hrvDiff = todayData.hrv && avgHrv ? todayData.hrv - avgHrv : 0;
-    const metrics = [
-      {ico:'😴', lbl:'Sommeil total', val:todayData.sleep?`${todayData.sleep.toFixed(1)}h`:'—',
-       sub: todayData.sleep ? (todayData.sleep>=sleepGoal?'✅ Objectif atteint':`${(sleepGoal-todayData.sleep).toFixed(1)}h de moins`):'', col:todayData.sleep>=sleepGoal?'var(--gn)':'var(--or)'},
-      {ico:'🌊', lbl:'Sommeil profond', val:todayData.deep?`${todayData.deep.toFixed(1)}h`:'—',
-       sub:todayData.deep?(todayData.deep>=1.5?'✅ Bien':'< 1h30'):'', col:todayData.deep>=1.5?'var(--gn)':'var(--yw)'},
-      {ico:'❤️', lbl:'FC repos', val:todayData.rhr?`${Math.round(todayData.rhr)} bpm`:'—',
-       sub:rhrDiff?`${rhrDiff>0?'+':''}${rhrDiff.toFixed(0)} vs moy`:'', col:rhrDiff>3?'var(--rd)':rhrDiff<-2?'var(--gn)':'var(--yw)'},
-      {ico:'📈', lbl:'HRV', val:todayData.hrv?`${Math.round(todayData.hrv)} ms`:'—',
-       sub:hrvDiff?`${hrvDiff>0?'+':''}${hrvDiff.toFixed(0)} vs moy`:'', col:hrvDiff>2?'var(--gn)':hrvDiff<-5?'var(--rd)':'var(--yw)'},
-      {ico:'👟', lbl:'Pas hier', val:todayData.steps?todayData.steps.toLocaleString('fr-FR'):'—',
-       sub:todayData.steps?(todayData.steps>=10000?'✅ 10k+':todayData.steps>=7000?'Bien':'< 7k'):'', col:todayData.steps>=10000?'var(--gn)':todayData.steps>=7000?'var(--yw)':'var(--or)'},
-      {ico:'🧠', lbl:'Ressenti', val:todayData.feel?`${todayData.feel}/10`:'—',
-       sub:'', col:todayData.feel>=7?'var(--gn)':todayData.feel>=5?'var(--yw)':'var(--rd)'},
-    ];
-    document.getElementById('hs-details').innerHTML = metrics.map(m=>`
-      <div style="background:rgba(0,0,0,.2);padding:10px 8px;text-align:center">
-        <div style="font-size:18px;margin-bottom:3px">${m.ico}</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:${m.col||'var(--tx)'};line-height:1">${m.val}</div>
-        <div style="font-size:8px;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px">${m.lbl}</div>
-        ${m.sub?`<div style="font-size:8px;color:${m.col||'var(--tx3)'};margin-top:2px">${m.sub}</div>`:''}
-      </div>`).join('');
-
-    // Actions block — what to do today
-    const todayPlan = plan(NOW);
-    const actions = score >= 80 ? [
-      {ico:'💪', txt:`Séance du jour : <strong>${todayPlan.type}</strong> — ${todayPlan.desc}. Corps reposé, profite-en !`},
-      {ico:'🥗', txt:'Mange suffisamment pour alimenter l\'effort. Hydratation dès le lever.'},
-      {ico:'😴', txt:`Coucher conseillé ce soir : <strong style="color:var(--pu)">${bedtime}</strong> pour respecter ton ${sleepGoal}h de sommeil.`},
-    ] : score >= 65 ? [
-      {ico:'👍', txt:`Séance du jour : <strong>${todayPlan.type}</strong> — ${todayPlan.desc}. Reste attentif aux sensations.`},
-      {ico:'💧', txt:'Hydratation importante. Mange des glucides avant et après l\'effort.'},
-      {ico:'😴', txt:`Coucher conseillé ce soir : <strong style="color:var(--pu)">${bedtime}</strong> — essaie de ne pas dépasser.`},
-    ] : score >= 45 ? [
-      {ico:'🚴', txt:`Fatigue détectée. Remplace la séance prévue (${todayPlan.type}) par <strong style="color:var(--or)">vélo souple 30-40min Z1</strong> ou mobilité.`},
-      {ico:'😴', txt:`Priorité : coucher à <strong style="color:var(--pu)">${bedtime}</strong> ce soir. Aucun écran après 22h.`},
-      {ico:'🥗', txt:'Magnésium, protéines, bonne hydratation pour accélérer la récupération.'},
-    ] : [
-      {ico:'🛑', txt:`Corps en dette. <strong style="color:var(--rd)">Annule l\'entraînement</strong> (${todayPlan.type}) — une séance forcée aujourd'hui ferait plus de mal que de bien.`},
-      {ico:'😴', txt:`Objectif du jour : dormir. Coucher à <strong style="color:var(--pu)">${bedtime}</strong> ou même avant.`},
-      {ico:'🧘', txt:'Stretching doux, marche légère maximum 20min, sieste si possible.'},
-    ];
-    document.getElementById('hs-actions').innerHTML = `
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx3);margin-bottom:10px">📋 Quoi faire aujourd'hui</div>
-      ${actions.map(a=>`<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--bd);font-size:12px;color:var(--tx2);line-height:1.5"><span style="flex-shrink:0;font-size:15px">${a.ico}</span><span>${a.txt}</span></div>`).join('')}`;
-
-    // Sleep tracking block — last 7 days
-    const last7 = Object.keys(healthData).sort().slice(-7);
-    const avgSleep7 = last7.filter(d=>healthData[d]?.sleep).map(d=>healthData[d].sleep);
-    const sleepAvg = avgSleep7.length ? (avgSleep7.reduce((a,b)=>a+b)/avgSleep7.length).toFixed(1) : null;
-    const sleepDebt = sleepAvg ? Math.max(0, sleepGoal - parseFloat(sleepAvg)).toFixed(1) : null;
-    document.getElementById('hs-sleep-block').innerHTML = `
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tx3);margin-bottom:10px">😴 Suivi sommeil — 7 derniers jours</div>
-      <div style="display:flex;gap:6px;margin-bottom:10px">
-        ${last7.map(d=>{
-          const e = healthData[d], s = e?.sleep||0;
-          const pct = Math.min(100, (s/sleepGoal)*100);
-          const c = s>=sleepGoal?'var(--gn)':s>=6?'var(--yw)':'var(--rd)';
-          const lbl = new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short'}).slice(0,3);
-          return `<div style="flex:1;text-align:center">
-            <div style="height:50px;background:var(--bg3);border-radius:4px;position:relative;overflow:hidden;margin-bottom:4px">
-              <div style="position:absolute;bottom:0;left:0;right:0;background:${c};height:${pct}%;border-radius:4px;opacity:.7;transition:height .3s"></div>
-              ${sleepGoal?`<div style="position:absolute;bottom:${(sleepGoal/sleepGoal*100)}%;left:0;right:0;height:1px;background:rgba(255,255,255,.2)"></div>`:''}
-            </div>
-            <div style="font-size:9px;color:${c};font-family:'JetBrains Mono',monospace;font-weight:700">${s?s.toFixed(1):'—'}</div>
-            <div style="font-size:8px;color:var(--tx3);text-transform:uppercase">${lbl}</div>
-          </div>`;
-        }).join('')}
-      </div>
-      <div style="display:flex;gap:16px;font-size:11px;flex-wrap:wrap">
-        <span>📊 Moyenne 7j : <strong style="color:${parseFloat(sleepAvg)>=sleepGoal?'var(--gn)':'var(--yw)'}">${sleepAvg||'—'}h</strong></span>
-        ${sleepDebt>0?`<span>💸 Dette de sommeil : <strong style="color:var(--rd)">${sleepDebt}h</strong> sous ton objectif</span>`:'<span style="color:var(--gn)">✅ Objectif atteint cette semaine</span>'}
-        <span>🎯 Objectif : <strong>${sleepGoal}h</strong>/nuit</span>
-      </div>`;
-
-    // Bedtime recommendation
-    const rhrTrend = (() => {
-      const vals = last7.filter(d=>healthData[d]?.rhr).map(d=>healthData[d].rhr);
-      if(vals.length<3) return null;
-      return vals[vals.length-1] - vals[0] > 3 ? 'hausse' : vals[vals.length-1] - vals[0] < -3 ? 'baisse' : 'stable';
-    })();
-    document.getElementById('hs-bedtime').innerHTML = `
-      <div style="font-size:28px;flex-shrink:0">🌙</div>
-      <div style="flex:1">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--pu);margin-bottom:3px">Heure de coucher conseillée ce soir</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:32px;font-weight:900;color:var(--pu);line-height:1">${bedtime}</div>
-        <div style="font-size:11px;color:var(--tx2);margin-top:4px;line-height:1.5">
-          Pour ${sleepGoal}h de sommeil · réveil à ${wakeTime}
-          ${sleepDebt>0?' · <strong style="color:var(--yw)">+30min recommandé pour rattraper la dette</strong>':''}
-          ${rhrTrend==='hausse'?' · <strong style="color:var(--rd)">FC repos en hausse — couche-toi plus tôt</strong>':''}
-        </div>
-      </div>`;
-  }
-
-  // Charts
-  const last14 = Object.keys(healthData).sort().slice(-14);
-  const lbls = last14.map(d=>d.slice(5));
-  const sleepData = last14.map(d=>parseFloat((healthData[d]?.sleep||0).toFixed(2)));
-  const deepData = last14.map(d=>parseFloat((healthData[d]?.deep||0).toFixed(2)));
-  const rhrData = last14.map(d=>healthData[d]?.rhr||null);
-  const hrvData = last14.map(d=>healthData[d]?.hrv||null);
-  const stepsData = last14.map(d=>healthData[d]?.steps||0);
-  const recovData = last14.map(d=>healthRecovScore(healthData[d]));
-
-  const baseOpts={responsive:true,plugins:{legend:{display:true,labels:{color:'#7c8396',boxWidth:10,font:{size:9}}}},scales:{x:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#3f4455',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#3f4455',font:{family:'JetBrains Mono',size:9}}}}};
-
-  if(charts['ch-sleep']) charts['ch-sleep'].destroy();
-  const ctxS=document.getElementById('ch-sleep')?.getContext('2d');
-  if(ctxS) charts['ch-sleep']=new Chart(ctxS,{type:'bar',data:{labels:lbls,datasets:[
-    {label:`Total (obj: ${sleepGoal}h)`,data:sleepData,backgroundColor:'rgba(59,130,246,0.5)',borderRadius:3},
-    {label:'Profond (obj: 1h30)',data:deepData,backgroundColor:'rgba(168,85,247,0.6)',borderRadius:3},
-    {type:'line',label:'Objectif',data:last14.map(()=>sleepGoal),borderColor:'rgba(34,197,94,0.5)',borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false},
-  ]},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,beginAtZero:true}}}});
-
-  if(charts['ch-rhr']) charts['ch-rhr'].destroy();
-  const ctxR=document.getElementById('ch-rhr')?.getContext('2d');
-  if(ctxR) charts['ch-rhr']=new Chart(ctxR,{type:'line',data:{labels:lbls,datasets:[
-    {label:'FC Repos (bpm)',data:rhrData,borderColor:'var(--rd)',borderWidth:2,pointRadius:3,tension:0.3,fill:false},
-    {label:'HRV (ms)',data:hrvData,borderColor:'var(--gn)',borderWidth:2,pointRadius:3,tension:0.3,fill:false,yAxisID:'y1'}
-  ]},options:{...baseOpts,scales:{...baseOpts.scales,y1:{position:'right',grid:{display:false},ticks:{color:'#3f4455',font:{size:9}}}}}});
-
-  if(charts['ch-recov']) charts['ch-recov'].destroy();
-  const ctxC=document.getElementById('ch-recov')?.getContext('2d');
-  if(ctxC) charts['ch-recov']=new Chart(ctxC,{type:'bar',data:{labels:lbls,datasets:[{data:recovData,backgroundColor:recovData.map(s=>s>=80?'rgba(34,197,94,.65)':s>=60?'rgba(251,191,36,.65)':s>=40?'rgba(249,115,22,.65)':'rgba(239,68,68,.65)'),borderRadius:3}]},options:{...baseOpts,plugins:{legend:{display:false}},scales:{...baseOpts.scales,y:{...baseOpts.scales.y,min:0,max:100}}}});
-
-  if(charts['ch-steps']) charts['ch-steps'].destroy();
-  const ctxSt=document.getElementById('ch-steps')?.getContext('2d');
-  if(ctxSt) charts['ch-steps']=new Chart(ctxSt,{type:'bar',data:{labels:lbls,datasets:[{data:stepsData,backgroundColor:stepsData.map(s=>s>=10000?'rgba(34,197,94,.6)':s>=7000?'rgba(251,191,36,.6)':'rgba(249,115,22,.5)'),borderRadius:3}]},options:{...baseOpts,plugins:{legend:{display:false}}}});
-
-  // Table
-  const body=document.getElementById('health-body');
-  if(body){
-    body.innerHTML=Object.keys(healthData).sort().reverse().slice(0,30).map(d=>{
-      const e=healthData[d], sc=healthRecovScore(e), col=healthGetColor(sc);
-      const sleepOk = e.sleep>=sleepGoal;
-      return `<tr>
-        <td style="color:var(--tx2)">${new Date(d+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})}</td>
-        <td style="color:${e.sleep?(e.sleep>=sleepGoal?'var(--gn)':'var(--yw)'):'var(--tx3)'}">${e.sleep?e.sleep.toFixed(1)+'h':'—'}</td>
-        <td>${e.deep?e.deep.toFixed(1)+'h':'—'}</td>
-        <td>${e.rhr?e.rhr+' bpm':'—'}</td><td>${e.hrv?e.hrv+' ms':'—'}</td>
-        <td>${e.steps?e.steps.toLocaleString('fr-FR'):'—'}</td>
-        <td>${e.feel?e.feel+'/10':'—'}</td>
-        <td><span style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:${col}">${sc||'—'}</span></td>
-      </tr>`;
-    }).join('');
-  }
-}
-
-// ===== VMA PACES ON CALENDAR =====
-let vmaKmh = 0;
-
-function vmaQuickSave(val){
-  vmaKmh = parseFloat(val)||0;
-  localStorage.setItem('ut3p_vma', vmaKmh);
-  updateDashPacesHint();
-  renderCal(); // refresh calendar with new paces
-}
-
-function vmaQuickLoad(){
-  vmaKmh = parseFloat(localStorage.getItem('ut3p_vma'))||0;
-  const el = document.getElementById('dash-vma');
-  if(el && vmaKmh) el.value = vmaKmh;
-  updateDashPacesHint();
-}
-
-function vmaToAllure(kmh){ // returns "M:SS"
-  if(!kmh) return null;
-  const minKm = 60/kmh;
-  const m = Math.floor(minKm);
-  const s = Math.round((minKm-m)*60);
-  return `${m}:${String(s).padStart(2,'0')}`;
-}
-
-function vmaGetPaceForType(type){
-  if(!vmaKmh) return null;
-  const paces = {
-    'EF':        vmaToAllure(vmaKmh * 0.65),
-    'ENDURANCE': vmaToAllure(vmaKmh * 0.65),
-    'SORTIE LONGUE': vmaToAllure(vmaKmh * 0.62),
-    'QUALITÉ':   vmaToAllure(vmaKmh * 0.90),
-    'VMA':       vmaToAllure(vmaKmh * 1.00),
-    'AFFÛTAGE':  vmaToAllure(vmaKmh * 0.72),
-    'SPÉCIFIQUE':vmaToAllure(vmaKmh * 0.75),
-  };
-  return paces[type] || null;
-}
-
-function updateDashPacesHint(){
-  const el = document.getElementById('dash-paces-hint');
-  if(!el) return;
-  if(!vmaKmh){ el.textContent = 'Entre ta VMA → allures sur le calendrier'; return; }
-  el.innerHTML = `EF <strong style="color:var(--bl)">${vmaGetPaceForType('EF')}</strong> · Seuil <strong style="color:var(--or)">${vmaGetPaceForType('QUALITÉ')}</strong> · VMA <strong style="color:var(--rd)">${vmaGetPaceForType('VMA')}</strong>/km`;
-}
-
-// ===== HEATMAP =====
-function renderHeatmap(){
-  const root = document.getElementById('heatmap-root');
-  if(!root) return;
-
-  // Build date → intensity map
-  const intensity = {};
-  let cur = new Date(2025,7,1); // Start from Aug 2025
-  while(cur <= UT3P){
-    const ds = fmt(cur);
-    const sess = getS(ds);
-    if(sess && (sess.dist||sess.time||sess.done)){
-      const effort = sess.rpe ? sess.rpe*10 : (sess.dist ? Math.min(100,sess.dist*3) : 30);
-      intensity[ds] = effort;
-    }
-    cur = add(cur,1);
-  }
-
-  const maxInt = Math.max(...Object.values(intensity), 1);
-
-  // Build grid: weeks as columns, days as rows (Mon=0)
-  const startDate = new Date(2025,7,4); // First Monday of Aug 2025
-  startDate.setDate(startDate.getDate() - (startDate.getDay()+6)%7);
-
-  const weeks = [];
-  let wStart = new Date(startDate);
-  const dayLabels = ['L','M','M','J','V','S','D'];
-  const monthLabels = {};
-
-  while(wStart <= add(UT3P, 7)){
-    const week = [];
-    for(let d=0;d<7;d++){
-      const day = add(wStart, d);
-      const ds = fmt(day);
-      const m = day.getMonth();
-      if(d===0) monthLabels[weeks.length] = day.toLocaleDateString('fr-FR',{month:'short'});
-      week.push({ds, day:new Date(day), int:intensity[ds]||0, future:day>NOW, inRange: day>=new Date(2025,7,1)&&day<=UT3P});
-    }
-    weeks.push(week);
-    wStart = add(wStart, 7);
-  }
-
-  const cellSize = 11, gap = 2;
-  const w = weeks.length*(cellSize+gap);
-  const h = 7*(cellSize+gap) + 20;
-
-  let svg = `<svg width="${w}" height="${h+20}" xmlns="http://www.w3.org/2000/svg" style="display:block">`;
-
-  // Month labels
-  let prevMonth = '';
-  weeks.forEach((week, wi)=>{
-    const lbl = monthLabels[wi];
-    if(lbl && lbl!==prevMonth){
-      svg += `<text x="${wi*(cellSize+gap)}" y="12" font-family="'Barlow Condensed',sans-serif" font-size="9" fill="#535868" text-anchor="start">${lbl.toUpperCase()}</text>`;
-      prevMonth = lbl;
-    }
-  });
-
-  // Day labels on left
-  dayLabels.forEach((lbl,i)=>{
-    if(i%2===0) svg += `<text x="-2" y="${20+i*(cellSize+gap)+9}" font-family="'JetBrains Mono',monospace" font-size="7" fill="#535868" text-anchor="end">${lbl}</text>`;
-  });
-
-  // Cells
-  weeks.forEach((week,wi)=>{
-    week.forEach((day,di)=>{
-      const x = wi*(cellSize+gap);
-      const y = 20 + di*(cellSize+gap);
-      let fill = 'rgba(255,255,255,0.03)';
-      let stroke = 'rgba(255,255,255,0.06)';
-      if(!day.inRange){ fill='rgba(0,0,0,0)'; stroke='none'; }
-      else if(day.future){ fill='rgba(255,255,255,0.02)'; stroke='rgba(255,255,255,0.04)'; }
-      else if(day.int > 0){
-        const pct = day.int/maxInt;
-        if(pct > 0.75) fill='#f97316';
-        else if(pct > 0.5) fill='rgba(249,115,22,0.75)';
-        else if(pct > 0.25) fill='rgba(249,115,22,0.45)';
-        else fill='rgba(249,115,22,0.22)';
-        stroke = 'none';
-      }
-      const isTod = day.ds===fmt(NOW);
-      svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" fill="${fill}" stroke="${isTod?'#f97316':stroke}" stroke-width="${isTod?1.5:0.5}"><title>${day.ds}${day.int?' · RPE '+Math.round(day.int/10):''}</title></rect>`;
-    });
-  });
-
-  svg += `</svg>`;
-  root.innerHTML = `<div style="padding-left:16px">${svg}</div>`;
-}
-
-// ===== SLEEP → PERFORMANCE CORRELATION =====
-function renderSleepPerfCorrelation(){
-  const points = [];
-  const dates = Object.keys(healthData).sort();
-  dates.forEach(d=>{
-    const sleep = healthData[d]?.sleep;
-    if(!sleep) return;
-    // Look at performance the NEXT day
-    const nextDay = fmt(add(new Date(d+'T12:00:00'),1));
-    const sess = getS(nextDay);
-    if(sess && sess.dist > 3 && sess.time > 0 && !sess.bike){
-      const allure = sess.time / sess.dist; // min/km
-      if(allure > 3 && allure < 12) points.push({x: sleep, y: Math.round(allure*100)/100, date:nextDay});
-    }
-  });
-
-  const note = document.getElementById('sleep-perf-note');
-  if(points.length < 3){
-    if(note) note.textContent = `Pas encore assez de données croisées (${points.length}/3 min). Continue d'importer tes nuits !`;
-    return;
-  }
-
-  // Simple linear regression
-  const n = points.length;
-  const meanX = points.reduce((s,p)=>s+p.x,0)/n;
-  const meanY = points.reduce((s,p)=>s+p.y,0)/n;
-  const slope = points.reduce((s,p)=>s+(p.x-meanX)*(p.y-meanY),0) / points.reduce((s,p)=>s+(p.x-meanX)**2,0);
-  const dir = slope < -0.05 ? '✅ Oui' : slope > 0.05 ? '⚠️ Correlation inverse' : '➡️ Pas de corrélation claire';
-  if(note) note.textContent = `${n} points · ${dir} — plus de sommeil → ${slope<0?'meilleure':'moins bonne'} allure (${Math.abs(slope*60).toFixed(0)}s/km par heure de sommeil)`;
-
-  if(charts['ch-sleep-perf']) charts['ch-sleep-perf'].destroy();
-  const ctx = document.getElementById('ch-sleep-perf')?.getContext('2d');
-  if(!ctx) return;
-
-  // Trend line points
-  const xMin = Math.min(...points.map(p=>p.x));
-  const xMax = Math.max(...points.map(p=>p.x));
-  const intercept = meanY - slope*meanX;
-  const trendData = [{x:xMin,y:slope*xMin+intercept},{x:xMax,y:slope*xMax+intercept}];
-
-  charts['ch-sleep-perf'] = new Chart(ctx,{
-    type:'scatter',
-    data:{datasets:[
-      {label:'Séances',data:points,backgroundColor:'rgba(59,130,246,0.6)',pointRadius:5,pointHoverRadius:7},
-      {type:'line',label:'Tendance',data:trendData,borderColor:'rgba(249,115,22,0.6)',borderWidth:1.5,borderDash:[4,4],pointRadius:0,fill:false},
-    ]},
-    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`Sommeil ${ctx.raw.x}h → allure ${ctx.raw.y}'/km`}}},
-      scales:{
-        x:{title:{display:true,text:'Sommeil (h)',color:'#3f4455',font:{size:9}},grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#3f4455',font:{size:9}}},
-        y:{title:{display:true,text:'Allure J+1 (min/km)',color:'#3f4455',font:{size:9}},reverse:true,grid:{color:'rgba(255,255,255,.03)'},ticks:{color:'#3f4455',font:{size:9}}}
-      }}
-  });
-}
-
-// ===== TREND ARROW ON DASHBOARD =====
-function renderTrendArrow(tsbData){
-  const el = document.getElementById('d-trend');
-  if(!el) return;
-
-  const today = fmt(NOW);
-  const twoWeeksAgo = fmt(add(NOW,-14));
-  const oneWeekAgo = fmt(add(NOW,-7));
-
-  const recent = tsbData.filter(t=>t.ds>=twoWeeksAgo&&t.ds<=today);
-  if(recent.length < 5){ el.innerHTML='<span style="color:var(--tx3)">Pas assez de données</span>'; return; }
-
-  const ctlNow = recent[recent.length-1]?.ctl || 0;
-  const ctlWeekAgo = recent.find(t=>t.ds>=oneWeekAgo)?.ctl || ctlNow;
-  const ctlTwoWAgo = recent[0]?.ctl || ctlNow;
-  const tsbNow = recent[recent.length-1]?.tsb || 0;
-  const ctlDiff = ctlNow - ctlTwoWAgo;
-
-  let arrow, arrowColor, label, advice;
-  if(ctlDiff > 3){
-    arrow='↗'; arrowColor='var(--gn)'; label='En progression';
-    advice='Charge bien absorbée. Continue sur cette lancée.';
-  } else if(ctlDiff > 0){
-    arrow='→'; arrowColor='var(--yw)'; label='Stable';
-    advice='Forme stable. Bonne période pour consolider.';
-  } else if(ctlDiff > -3){
-    arrow='↘'; arrowColor='var(--or)'; label='Légère baisse';
-    advice='CTL en recul. Normal après une récup. Reprends la charge.';
-  } else {
-    arrow='↓'; arrowColor='var(--rd)'; label='Décharge marquée';
-    advice='Charge nettement réduite. Affûtage intentionnel ?';
-  }
-
-  const tsbColor = tsbNow > 5 ? 'var(--gn)' : tsbNow > -10 ? 'var(--yw)' : 'var(--rd)';
-
-  el.innerHTML=`
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:${arrowColor};line-height:1">${arrow}</div>
-      <div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;color:${arrowColor}">${label}</div>
-        <div style="font-size:10px;color:var(--tx3)">CTL 14j : ${ctlTwoWAgo.toFixed(0)} → <strong style="color:${arrowColor}">${ctlNow.toFixed(0)}</strong> (${ctlDiff>0?'+':''}${ctlDiff.toFixed(1)})</div>
-      </div>
-    </div>
-    <div style="font-size:11px;color:var(--tx2);margin-bottom:6px">${advice}</div>
-    <div style="font-size:10px">TSB actuel : <strong style="color:${tsbColor}">${tsbNow>0?'+':''}${tsbNow.toFixed(1)}</strong> ${tsbNow>5?'😊 Reposé':tsbNow<-15?'😓 Chargé':'⚖️ Équilibré'}</div>`;
-}
-
-// ===== ANALYSE HEBDOMADAIRE IA =====
-let weeklyNotifEnabled = false;
-let weeklyNotifTimer = null;
-
-function weeklySetupNotif(){
-  const btn = document.getElementById('weekly-notif-btn');
-  if(!weeklyNotifEnabled){
-    Notification.requestPermission().then(perm=>{
-      if(perm!=='granted'){alert('Active les notifications dans les réglages.');return;}
-      weeklyNotifEnabled = true;
-      localStorage.setItem('ut3p_weekly_notif','1');
-      weeklyScheduleMonday();
-      if(btn){btn.textContent='🔔 Lundi ON';btn.style.color='var(--yw)';}
-      alert('✅ Analyse hebdo activée ! Tu recevras un résumé chaque lundi matin.');
-    });
-  } else {
-    weeklyNotifEnabled = false;
-    localStorage.removeItem('ut3p_weekly_notif');
-    if(weeklyNotifTimer){clearTimeout(weeklyNotifTimer);weeklyNotifTimer=null;}
-    if(btn){btn.textContent='🔔 Chaque lundi';btn.style.color='var(--tx3)';}
-  }
-}
-
-function weeklyScheduleMonday(){
-  if(!weeklyNotifEnabled) return;
-  const now = new Date();
-  const nextMon = new Date(now);
-  const daysUntilMon = (8 - now.getDay()) % 7 || 7;
-  nextMon.setDate(now.getDate() + daysUntilMon);
-  nextMon.setHours(8,0,0,0);
-  const delay = nextMon - now;
-  weeklyNotifTimer = setTimeout(()=>{
-    weeklyAnalyze(true);
-    weeklyScheduleMonday();
-  }, delay);
-}
-
-async function weeklyAnalyze(silent=false){
-  const btn = document.getElementById('weekly-ai-btn');
-  const loading = document.getElementById('weekly-ai-loading');
-  const result = document.getElementById('weekly-ai-result');
-  if(btn) btn.disabled=true;
-  if(loading) loading.style.display='block';
-  if(result) result.style.display='none';
-
-  // Build context
-  const monday = new Date(NOW); monday.setDate(NOW.getDate()-(NOW.getDay()+6)%7);
-  const lastMonday = add(monday,-7);
-  const seances=[], health7=[];
-  for(let i=0;i<7;i++){
-    const d=add(lastMonday,i), ds=fmt(d), sess=getS(ds), p=plan(d), sp=SPECIAL[ds];
-    seances.push({dow:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'][i],planned:sp?sp.label:p.type,
-      done:sess?.done||false,dist:sess?.dist||0,time:sess?.time||0,rpe:sess?.rpe||0});
-    if(healthData[ds]) health7.push({d:ds,...healthData[ds],score:healthRecovScore(healthData[ds])});
-  }
-  const tsbNow = computeTSB().find(t=>t.ds===fmt(NOW));
-  const nextWeekSessions = [];
-  for(let i=0;i<7;i++){
-    const d=add(monday,i),ds=fmt(d),p=plan(d),sp=SPECIAL[ds];
-    nextWeekSessions.push({dow:['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'][i],type:sp?sp.label:p.type,desc:sp?sp.label:p.desc});
-  }
-  const dLhut=Math.ceil((LHUT-NOW)/864e5),dUt3p=Math.ceil((UT3P-NOW)/864e5);
-
-  const prompt=`Coach trail. Analyse la semaine écoulée de cet athlète en 3 points courts et donne l'objectif de la semaine à venir.
-
-SEMAINE DU ${fmt(lastMonday)} :
-${seances.map(s=>`${s.dow}: prévu=${s.planned} | ${s.done?'✅ '+s.dist+'km'+' RPE'+s.rpe:'❌ non fait'}`).join('\n')}
-
-SANTÉ :
-${health7.map(h=>`${h.d}: sommeil=${h.sleep||'?'}h · FC=${h.rhr||'?'} · score=${h.score||'?'}`).join('\n')||'Pas de données santé'}
-
-FORME : CTL=${tsbNow?.ctl.toFixed(1)||'?'} · ATL=${tsbNow?.atl.toFixed(1)||'?'} · TSB=${tsbNow?.tsb.toFixed(1)||'?'}
-OBJECTIFS : LHUT J-${dLhut} · UT3P J-${dUt3p}
-
-SEMAINE À VENIR :
-${nextWeekSessions.map(s=>`${s.dow}: ${s.type}`).join(' · ')}
-
-Génère un JSON :
-{"bien":"Ce qui s'est bien passé (1 phrase max)","manque":"Ce qui manque ou point d'attention (1 phrase)","objectif":"L'objectif clé de la semaine à venir (1 phrase actionnable)","emoji_semaine":"1 emoji résumant la semaine"}`;
-
-  try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:500,system:'Coach trail expert. JSON uniquement, commence par {.',messages:[{role:'user',content:prompt}]})});
-    const data=await resp.json();
-    if(data.error) throw new Error(data.error.message);
-    let raw=data.content.map(c=>c.text||'').join('').trim();
-    const s=raw.indexOf('{'),e=raw.lastIndexOf('}');
-    const r=JSON.parse(raw.slice(s,e+1));
-
-    if(silent && Notification.permission==='granted'){
-      new Notification(`${r.emoji_semaine} Bilan semaine UT3P`,{body:`✅ ${r.bien}\n🎯 Cette semaine : ${r.objectif}`});
-    }
-
-    if(result){
-      result.style.display='block';
-      result.innerHTML=`
-        <div style="font-size:28px;text-align:center;margin-bottom:8px">${r.emoji_semaine}</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="background:var(--gnd);border-left:3px solid var(--gn);border-radius:0 6px 6px 0;padding:8px 12px;font-size:12px"><strong style="color:var(--gn)">✅ Ce qui s'est bien passé</strong><br><span style="color:var(--tx2)">${r.bien}</span></div>
-          <div style="background:var(--ywd);border-left:3px solid var(--yw);border-radius:0 6px 6px 0;padding:8px 12px;font-size:12px"><strong style="color:var(--yw)">⚠️ Point d'attention</strong><br><span style="color:var(--tx2)">${r.manque}</span></div>
-          <div style="background:rgba(168,85,247,.1);border-left:3px solid var(--pu);border-radius:0 6px 6px 0;padding:8px 12px;font-size:12px"><strong style="color:var(--pu)">🎯 Objectif de la semaine</strong><br><span style="color:var(--tx2)">${r.objectif}</span></div>
-        </div>`;
-    }
-  }catch(err){
-    if(result){result.style.display='block';result.innerHTML=`<div style="color:var(--rd);font-size:11px">⚠️ ${err.message}</div>`;}
-  }finally{
-    if(btn) btn.disabled=false;
-    if(loading) loading.style.display='none';
-  }
-}
-function hrGetZonePill(fc){ return fc ? `<span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3)">${fc}bpm</span>` : '—'; }
-function weightLoad(){ try{ const d=JSON.parse(localStorage.getItem('ut3p_health')||'{}'); }catch(e){} }
+// ===== STUBS — fonctions supprimées encore référencées =====
+function hrGetZonePill(fc){ return fc ? `<span style="font-size:10px;color:var(--tx3)">${Math.round(fc)}bpm</span>` : '—'; }
+function vmaQuickLoad(){}
+function weightLoad(){}
+function renderHeatmap(){}
+function renderTrendArrow(){}
+function renderSleepPerfCorrelation(){}
+function healthLoadSettings(){}
+function healthRender(){}
+function weeklyScheduleMonday(){}
 
 // ===== NAV =====
 function go(id,btn){
@@ -3761,17 +2331,14 @@ function go(id,btn){
   btn.classList.add('on');
   if(id==='log') renderLog();
   if(id==='strava') stravaRenderState();
-  if(id==='ravito'){ ravitoRenderPoints(); if(!ravitoPoints.length) ravitoLoadUT3P(); else ravitoCalc(); }
-  if(id==='health'){ healthLoadSettings(); healthRender(); renderSleepPerfCorrelation(); }
-  if(id==='stats'){ renderCharts(); renderHeatmap(); }
+  if(id==='stats') renderCharts();
 }
 
 // ===== INIT =====
 function init(){
-  load(); stravaLoadTokens(); notifLoadSettings(); healthLoad();
+  load(); stravaLoadTokens(); notifLoadSettings();
   vmaQuickLoad();
   weeklyNotifEnabled = !!localStorage.getItem('ut3p_weekly_notif');
-  if(weeklyNotifEnabled) weeklyScheduleMonday();
   renderCal(); renderCharts(); renderLog();
   renderTodayBanner(); stravaRenderState();
   notifScheduleNext();
