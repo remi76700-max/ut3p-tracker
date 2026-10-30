@@ -33,7 +33,12 @@ ul{padding-left:18px;margin:6px 0}li{margin:4px 0;font-size:13px}
 <div class="card"><b>Règle +10 % (patte d'oie)</b><div class="sub" id="crule"></div></div></div>
 <div id="t-poids" class="hide"><div class="card"><div class="sub">Objectif : 92–93 kg au 3 janvier (départ 98 kg)</div>
 <div style="display:flex;gap:8px;margin-top:8px"><input class="n" id="wv" type="number" step="0.1" placeholder="kg" style="flex:1"><button onclick="addW()" style="background:var(--or);border:0;color:#fff;border-radius:8px;padding:8px 14px;font-weight:700">Ajouter</button></div>
-<canvas id="cv" width="700" height="220" style="width:100%;margin-top:12px"></canvas><table id="wt"></table></div></div>
+<canvas id="cv" width="700" height="220" style="width:100%;margin-top:12px"></canvas><table id="wt"></table></div><div class="card"><b>🔄 Sauvegarde / synchro entre appareils</b><div class="sub">Tes cases cochées et tes pesées restent sur l'appareil. Pour les copier sur un autre : exporte ici, puis importe là-bas (les deux se fusionnent).</div>
+<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"><button onclick="exportData()" style="flex:1;background:var(--or);border:0;color:#fff;border-radius:8px;padding:9px;font-weight:700">Exporter (copier le code)</button><button onclick="downloadData()" style="flex:1;background:var(--card);border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:9px;font-weight:700">Télécharger le fichier</button></div>
+<textarea id="imp" rows="3" placeholder="Colle ici le code exporté depuis l'autre appareil" style="width:100%;margin-top:8px"></textarea>
+<div style="display:flex;gap:8px;margin-top:8px"><button onclick="importData(document.getElementById('imp').value)" style="flex:1;background:var(--gr);border:0;color:#fff;border-radius:8px;padding:9px;font-weight:700">Importer le code</button><label style="flex:1;text-align:center;background:var(--card);border:1px solid var(--bd);color:var(--tx);border-radius:8px;padding:9px;font-weight:700;cursor:pointer">Importer un fichier<input type="file" accept=".json" style="display:none" onchange="importFile(this)"></label></div>
+<div class="sub" id="smsg" style="margin-top:6px"></div></div>
+</div>
 <div id="t-seances" class="hide">
 <div class="card"><b>🔥 Week-ends chocs</b><ul><li><b>23–24 janv.</b> Choc #1 : 3h30 + 3h</li><li><b>12–14 fév.</b> Choc #2 (3 jours) : 1h30 + 4h + 3h30</li><li><b>27 fév.</b> Sortie 50 km D+1500 (≈8h) = TEST décisif</li><li><b>19–21 mars</b> GRAND CHOC : 2h + 6h + 4h = 12h</li><li><b>3–4 avril</b> Challenge nocturne 15 km + 26 km (facile)</li></ul><div class="sub">Allure facile (RPE ≤6–7), marche dans les côtes, nutrition de course à chaque fois. Après un grand choc : 4–7 jours de récup active.</div></div>
 <div class="card"><b>⛰️ Escaliers (400 marches ≈ 70 m D+, à mesurer avec ta montre)</b><ul><li>1×/semaine (mercredi). Montée en marche active (bâtons dès janvier), descente LENTE avec la rampe : les descentes d'escalier sollicitent le tendon et les quadriceps.</li><li>Si douleur à la patte d'oie : on divise les montées par 2.</li><li>Progression : 4–8 montées (nov–déc) → 8–12 (janv) → 12–14 avec sac 5–6 kg (fév–mars).</li><li>Pluie / gel : plan B tapis (affiché dans la séance).</li></ul></div>
@@ -142,5 +147,17 @@ function renderBar(){const el=document.getElementById('bar');if(!el)return;let s
  let prev=0,pk=0;BAR.forEach(b=>{h+='<tr><td>'+b[0]+'</td><td>'+fmtHM(b[1])+'</td><td>'+fmtHM(b[2])+'</td><td>'+(b[1]-b[2])+' min</td>'+(s?'<td>'+clock(s,b[1])+'</td><td>'+clock(s,b[2])+'</td>':'')+'</tr>'});
  h+='<tr><td colspan="6" class="sub">Allures cibles par tronçon : 0–33 km ≈8:38 · 33–54 ≈10:00 · 54–74 ≈10:30 · 74–91 ≈12:20 (D+ et fatigue inclus)</td></tr>';
  el.innerHTML=h}
+
+function snapshot(){return JSON.stringify({v:1,done:done,w:weights,start:(function(){try{return localStorage.getItem('rc_start')||''}catch(e){return ''}})()})}
+function exportData(){const s=snapshot();const m=document.getElementById('smsg');
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(()=>{m.textContent='Code copié. Colle-le dans l\'autre appareil (Importer).'},()=>{document.getElementById('imp').value=s;m.textContent='Copie manuelle : le code est dans la zone ci-dessous.'})}
+ else{document.getElementById('imp').value=s;m.textContent='Copie manuelle : le code est dans la zone ci-dessous.'}}
+function downloadData(){const b=new Blob([snapshot()],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='radicatrail_suivi_'+ti+'.json';a.click()}
+function importData(t){const m=document.getElementById('smsg');try{const d=JSON.parse(t);if(!d||d.v!==1)throw 0;
+ Object.keys(d.done||{}).forEach(k=>{if(d.done[k])done[k]=true});
+ const mp={};weights.concat(d.w||[]).forEach(p=>{mp[p.d]=p});weights=Object.values(mp).sort((a,b)=>a.d<b.d?-1:1);
+ if(d.start){try{localStorage.setItem('rc_start',d.start)}catch(e){}}
+ sv('rc_done',done);sv('rc_w',weights);render();renderBar();m.textContent='Import réussi : données fusionnées.'}catch(e){m.textContent='Code invalide.'}}
+function importFile(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>importData(r.result);r.readAsText(f)}
 renderBar();render();
 </script></body></html>
